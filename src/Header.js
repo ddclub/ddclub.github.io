@@ -14,6 +14,7 @@ import Butter from 'buttercms';
 
 const butter = Butter('1ab2db4f14c0c5e4d4f221ca8702b0960f9b6ee8');
 
+var PrimaryPagesNavItems = null;
 
 class Header extends Component {
 
@@ -34,29 +35,28 @@ class Header extends Component {
 
     componentWillMount() {
         butter.page.list('primary_page').then((resp) => {
+            let primaryPagesCall = resp.data.data;
+            let startlink = "/pages/";
+            primaryPagesCall.forEach(function (obj) { obj.pageLink = startlink.concat(obj.slug); });
+            primaryPagesCall.sort(function (a, b) { return a.fields.page_id > b.fields.page_id });
+
             this.setState({
-                primaryPagesContent: resp.data.data
+                primaryPagesContent: primaryPagesCall
             })
         });
     }
 
     render() {
-        let primaryPagesCall = this.state.primaryPagesContent;
         let PrimaryPagesNavItems = null;
-
-        if (primaryPagesCall) {
-            let startlink = "/pages/";
-
-            primaryPagesCall.forEach(function (obj) { obj.pageLink = startlink.concat(obj.slug); });
-            primaryPagesCall.sort(function(a,b){return a.fields.page_id > b.fields.page_id});
-
-            PrimaryPagesNavItems = primaryPagesCall.map((pageItem) =>
+        if (this.state.primaryPagesContent) {
+            PrimaryPagesNavItems = this.state.primaryPagesContent.map((pageItem) =>
                 <NavItem key={pageItem.fields.page_id}>
                     <NavLink href={pageItem.pageLink}>{pageItem.fields.headline}</NavLink>
                 </NavItem>);
             console.log(PrimaryPagesNavItems);
-        }
 
+        }
+        
         return (
             <header>
                 <Container>
