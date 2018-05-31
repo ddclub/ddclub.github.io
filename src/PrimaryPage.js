@@ -40,7 +40,7 @@ class PrimaryPage extends Component {
 
     render() {
         let slug = this.props.match.params.slug;
-        console.log(slug);
+        //console.log(slug);
         if (this.state.content) {
             const primarypage = this.state.content;
 
