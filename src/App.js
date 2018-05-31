@@ -1,20 +1,23 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { Button } from 'reactstrap';
 import HomePage from './HomePage';
-import Header from './Header';
+import NavBar from './NavBar';
+import { BrowserRouter, Route } from 'react-router-dom';
+import PrimaryPage from './PrimaryPage';
 
 
 class App extends Component {
   render() {
     return (
+      <BrowserRouter>
       <div className="App">
-        <Header/>
+        <NavBar/>
         <div>
-          {this.props.children}
+        <Route exact path="/" component={HomePage}/>
+        <Route exact path="/pages/:slug" component={PrimaryPage}/>
         </div>
       </div>
+      </BrowserRouter>
     );
   }
 }
