@@ -53,9 +53,6 @@ class Header extends Component {
                         <NavLink>{pageItem.fields.headline}</NavLink>
                     </NavItem>
                 </LinkContainer>);
-                
-            //console.log(PrimaryPagesNavItems);
-
         }
 
         return (

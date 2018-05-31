@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Butter from 'buttercms';
 import { Container } from 'reactstrap';
 import ErrorMessage from './ErrorMessage';
-import HomePage from './HomePage';
 const butter = Butter('1ab2db4f14c0c5e4d4f221ca8702b0960f9b6ee8');
 
 class PrimaryPage extends Component {
@@ -39,7 +38,7 @@ class PrimaryPage extends Component {
 
 
     render() {
-        let slug = this.props.match.params.slug;
+        //let slug = this.props.match.params.slug;
         //console.log(slug);
         if (this.state.content) {
             const primarypage = this.state.content;
