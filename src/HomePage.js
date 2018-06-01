@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 
-class StandardPage extends Component {
+class HomePage extends Component {
 
     render() {
         let fields = this.props.fields;
@@ -17,13 +17,10 @@ class StandardPage extends Component {
                                 <p>{fields.page_info}</p>
                             </div>
                         </Row>
-                        <Row>
-                            <div dangerouslySetInnerHTML={{ __html: fields.custom_html }} />
-                        </Row>
                     </Container>
                 </div>
             </div>
         );
     }
 
-} export default StandardPage;
+} export default HomePage;

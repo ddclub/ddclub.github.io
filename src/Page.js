@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import ErrorPage from './ErrorPage';
 import StandardPage from './StandardPage';
 import CustomPage from './CustomPage';
+import HomePage from './HomePage';
 const butter = Butter('1ab2db4f14c0c5e4d4f221ca8702b0960f9b6ee8');
 
 class Page extends Component {
@@ -58,7 +59,13 @@ class Page extends Component {
                         <StandardPage fields={fields}/>
                     </div>
                 );
-            } else {
+            }  else if (thisPageType === 'home') {
+                return (
+                    <div>
+                        <HomePage fields={fields}/>
+                    </div>
+                );
+            }else {
                 return (
                     <Container>
                         <ErrorPage />

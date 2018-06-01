@@ -41,7 +41,9 @@ class Footer extends Component {
                             <Col xs="12" sm="12" md="4">
                             <div>
                                 <span>
+                                    <small>
                                     Made with <img className="butter-img" src={footercontent.fields.buttercms_image} alt=""></img> ButterCMS
+                                    </small>
                                 </span>
                             </div>
                             </Col>
