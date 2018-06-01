@@ -16,7 +16,8 @@ class PrimaryPage extends Component {
 
     setContent() {
         let slug = this.props.match.params.slug;
-        butter.page.retrieve('primary_page', slug).then((resp) => {
+        if (!slug || slug === '') slug = 'home-page';
+        butter.page.retrieve('*', slug).then((resp) => {
             this.setState({
                 content: resp.data.data
             })
@@ -31,27 +32,36 @@ class PrimaryPage extends Component {
         if (snapshot !== null) {
             let slug = this.props.match.params.slug;
             let prevslug = prevProps.match.params.slug;
-            if(slug !== prevslug) this.setContent();
+            if (slug !== prevslug) this.setContent();
             //if(slug !== prevslug) console.log('updated');
         }
-      }
+    }
 
 
     render() {
-        //let slug = this.props.match.params.slug;
-        //console.log(slug);
         if (this.state.content) {
             const primarypage = this.state.content;
 
-            return (
-                <div id="home">
+            if (primarypage.fields.custom_html) {
+                return (
                     <Container>
-                        <h2 className="text-center">{primarypage.fields.headline}</h2>
-                        <p>{primarypage.fields.page_info}</p>
-
+                        <div dangerouslySetInnerHTML={{ __html: primarypage.fields.custom_html }} />
                     </Container>
-                </div>
-            );
+                );
+            } else {
+                return (
+                    <div>
+                        <div className="pageHeader">
+                            <h2 className="text-center">{primarypage.fields.headline}</h2>
+                        </div>
+                        <div className="pageBody">
+                            <Container>
+                                <p>{primarypage.fields.page_info}</p>
+                            </Container>
+                        </div>
+                    </div>
+                );
+            }
 
         } else {
             return (

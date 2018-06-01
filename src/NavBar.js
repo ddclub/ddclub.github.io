@@ -34,7 +34,7 @@ class Header extends Component {
     componentWillMount() {
         butter.page.list('primary_page').then((resp) => {
             let primaryPagesCall = resp.data.data;
-            let startlink = "/pages/";
+            let startlink = "/";
             primaryPagesCall.forEach(function (obj) { obj.pageLink = startlink.concat(obj.slug); });
             primaryPagesCall.sort(function (a, b) { return a.fields.page_id > b.fields.page_id });
 
@@ -50,7 +50,7 @@ class Header extends Component {
             PrimaryPagesNavItems = this.state.primaryPagesContent.map((pageItem) =>
                 <LinkContainer to={pageItem.pageLink}>
                     <NavItem key={pageItem.fields.page_id}>
-                        <NavLink>{pageItem.fields.headline}</NavLink>
+                        <NavLink>{pageItem.fields.nav_name}</NavLink>
                     </NavItem>
                 </LinkContainer>);
         }
@@ -62,11 +62,6 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
-                            <LinkContainer to="/">
-                                <NavItem>
-                                    <NavLink>Home</NavLink>
-                                </NavItem>
-                            </LinkContainer>
                             {PrimaryPagesNavItems}
                         </Nav>
                     </Collapse>
