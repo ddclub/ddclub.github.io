@@ -31,7 +31,20 @@ class Header extends Component {
         });
     }
 
-    componentWillMount() {
+    getNavItems(content){
+        let PrimaryPagesNavItems = content;
+        if (content) {
+            PrimaryPagesNavItems = content.map((pageItem) =>
+                <LinkContainer to={pageItem.pageLink}>
+                    <NavItem key={pageItem.fields.page_id}>
+                        <NavLink>{pageItem.fields.nav_name}</NavLink>
+                    </NavItem>
+                </LinkContainer>);
+        }
+        return PrimaryPagesNavItems;
+    }
+
+    setContent() {
         butter.page.list('primary_page').then((resp) => {
             let primaryPagesCall = resp.data.data;
             let startlink = "/";
@@ -44,16 +57,15 @@ class Header extends Component {
         });
     }
 
+    
+
+    componentWillMount() {
+        this.setContent();
+    }
+
     render() {
-        let PrimaryPagesNavItems = null;
-        if (this.state.primaryPagesContent) {
-            PrimaryPagesNavItems = this.state.primaryPagesContent.map((pageItem) =>
-                <LinkContainer to={pageItem.pageLink}>
-                    <NavItem key={pageItem.fields.page_id}>
-                        <NavLink>{pageItem.fields.nav_name}</NavLink>
-                    </NavItem>
-                </LinkContainer>);
-        }
+        let primaryPagesItems = this.getNavItems(this.state.primaryPagesContent);
+        
 
         return (
             <Container>
@@ -62,7 +74,7 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
-                            {PrimaryPagesNavItems}
+                            {primaryPagesItems}
                         </Nav>
                     </Collapse>
                 </Navbar>

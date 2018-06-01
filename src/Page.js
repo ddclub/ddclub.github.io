@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import Butter from 'buttercms';
 import { Container } from 'reactstrap';
-import ErrorMessage from './ErrorMessage';
+import ErrorPage from './ErrorPage';
+import StandardPage from './StandardPage';
+import CustomPage from './CustomPage';
 const butter = Butter('1ab2db4f14c0c5e4d4f221ca8702b0960f9b6ee8');
 
-class PrimaryPage extends Component {
+class Page extends Component {
 
     constructor(props) {
         super(props);
@@ -40,37 +42,38 @@ class PrimaryPage extends Component {
 
     render() {
         if (this.state.content) {
-            const primarypage = this.state.content;
+            const thisPage = this.state.content;
+            const fields = thisPage.fields;
+            let thisPageType = thisPage.fields.page_type;
 
-            if (primarypage.fields.custom_html) {
+            if (thisPageType === 'custom') {
                 return (
-                    <Container>
-                        <div dangerouslySetInnerHTML={{ __html: primarypage.fields.custom_html }} />
-                    </Container>
+                    <div>
+                        <CustomPage fields={fields}/>
+                    </div>
+                );
+            } else if (thisPageType === 'standard') {
+                return (
+                    <div>
+                        <StandardPage fields={fields}/>
+                    </div>
                 );
             } else {
                 return (
-                    <div>
-                        <div className="pageHeader">
-                            <h2 className="text-center">{primarypage.fields.headline}</h2>
-                        </div>
-                        <div className="pageBody">
-                            <Container>
-                                <p>{primarypage.fields.page_info}</p>
-                            </Container>
-                        </div>
-                    </div>
+                    <Container>
+                        <ErrorPage />
+                    </Container>
                 );
             }
 
         } else {
             return (
                 <Container>
-                    <ErrorMessage />
+                    <ErrorPage />
                 </Container>
-            )
+            );
         }
     }
 }
 
-export default PrimaryPage;
+export default Page;

@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Header from './Header';
 import Footer from './Footer';
-import PrimaryPage from './PrimaryPage';
+import Page from './Page';
 
 
 class App extends Component {
@@ -14,8 +14,8 @@ class App extends Component {
         <div className="App">
           <Header />
           
-            <Route exact path="/" component={PrimaryPage}/>
-            <Route exact path="/:slug" component={PrimaryPage} />
+            <Route exact path="/" component={Page}/>
+            <Route exact path="/:slug" component={Page} />
 
           <Footer />
         </div>
