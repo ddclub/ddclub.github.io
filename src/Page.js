@@ -42,23 +42,28 @@ class Page extends Component {
 
         if (element.primary && element.primary.component_type) {
 
-          if (element.primary.component_type === 'header_section') {
-            sectionsComponents.push(
-              <PageHeaderSection slice={element} />
-            );
-          } else if (element.primary.component_type === 'paragraph_section') {
-            sectionsComponents.push(
-              <PageParagraphSection slice={element} />
-            );
+          let sectionComponentType = element.primary.component_type;
+          let sectionContents = null;
+
+          if (sectionComponentType === 'header_section') {
+            sectionContents = <PageHeaderSection slice={element} />;
+          } else if (sectionComponentType === 'paragraph_section') {
+            sectionContents = <PageParagraphSection slice={element} />;
           }
+
+          if (sectionContents) {
+            let sectionDiv = <div className="pageSection">{sectionContents}</div>;
+            sectionsComponents.push(sectionDiv);
+          }
+
         }
       });
 
       return (
-        <Container>
-          <div>{sectionsComponents}</div>
+        <Container className="pageSections">
+          {sectionsComponents}
         </Container>
-        
+
       );
     }
     return <div></div>;
