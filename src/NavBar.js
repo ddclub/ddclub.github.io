@@ -42,14 +42,13 @@ class NavBar extends Component {
         let navItemsMap = null;
         if (this.state.doc && this.state.docs) {
             navbarTitle = this.state.doc.data.navbar_title;
-            navItemsMap = this.state.docs.map((item) =>
+            navItemsMap = this.state.docs.map((item, index) =>
                 <LinkContainer to={item.primary.item_link.uid}>
-                    <NavItem key={item.primary.item_link.uid}>
+                    <NavItem eventKey={index}>
                         <NavLink>{item.primary.item_title}</NavLink>
                     </NavItem>
                 </LinkContainer>
             );
-
         }
 
         return (

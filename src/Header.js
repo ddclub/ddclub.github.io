@@ -6,7 +6,7 @@ class Header extends Component {
 
     render() {
         return (
-            <header className="header">
+            <header className="appHeader">
                 <Container>
                     <NavBar/>
                 </Container>
