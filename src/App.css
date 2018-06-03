@@ -1,45 +1,31 @@
 
 
 
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}
-
 .App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+.appContent {
+  flex: 1;
 }
 
 .appHeader {
+  padding: 2vh;
   background-color: #b7e8f4;
-  padding: 10px;
+}
+
+.appFooter {
+  padding: 2vh;
+  background-color: #f5f5f5;
 }
 
 .pageSections {
-  padding-top: 5vh;
-  padding-top: 5%;
-  padding-bottom: 5vh;
-  padding-bottom: 5%;
+  padding: 2vh;
 }
 
 .pageSection {
   padding-bottom: 1vh;
   padding-bottom: 1%;
-}
-
-.appFooter {
-  position: absolute;
-  bottom: 0;
-  padding-top: 10px;
-  width: 100%;
-  min-height: 60px; 
-  background-color: #f5f5f5;
-}
-
-.img-fluid {
-  width: auto;
 }

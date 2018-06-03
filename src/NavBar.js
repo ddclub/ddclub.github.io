@@ -44,7 +44,7 @@ class NavBar extends Component {
             navbarTitle = this.state.doc.data.navbar_title;
             navItemsMap = this.state.docs.map((item, index) =>
                 <LinkContainer to={item.primary.item_link.uid}>
-                    <NavItem eventKey={index}>
+                    <NavItem key={index}>
                         <NavLink>{item.primary.item_title}</NavLink>
                     </NavItem>
                 </LinkContainer>
