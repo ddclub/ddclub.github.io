@@ -13,10 +13,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Header />
-          
             <Route exact path="/" component={Page}/>
             <Route exact path="/:slug" component={Page} />
-
           <Footer />
         </div>
       </BrowserRouter>

@@ -9,12 +9,12 @@ import {
     NavLink
 } from 'reactstrap';
 import { Container } from 'reactstrap';
-import Butter from 'buttercms';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link, RichText, Date } from 'prismic-reactjs';
+import Prismic from 'prismic-javascript';
+import { linkResolver, PrismicSetNav } from './helpers';
 
-const butter = Butter('1ab2db4f14c0c5e4d4f221ca8702b0960f9b6ee8');
-
-class Header extends Component {
+class NavBar extends Component {
 
     constructor(props) {
         super(props);
@@ -22,8 +22,9 @@ class Header extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            primaryPagesContent: null
+            docs: null
         };
+
     }
     toggle() {
         this.setState({
@@ -31,41 +32,23 @@ class Header extends Component {
         });
     }
 
-    getNavItems(content){
-        let PrimaryPagesNavItems = content;
-        if (content) {
-            PrimaryPagesNavItems = content.map((pageItem) =>
-                <LinkContainer to={pageItem.pageLink}>
-                    <NavItem key={pageItem.fields.page_id}>
-                        <NavLink>{pageItem.fields.nav_name}</NavLink>
-                    </NavItem>
-                </LinkContainer>);
-        }
-        return PrimaryPagesNavItems;
-    }
-
-    setContent() {
-        butter.page.list('primary_page').then((resp) => {
-            let primaryPagesCall = resp.data.data;
-            let startlink = "/";
-            primaryPagesCall.forEach(function (obj) { obj.pageLink = startlink.concat(obj.slug); });
-            primaryPagesCall.sort(function (a, b) { return a.fields.page_id > b.fields.page_id });
-
-            this.setState({
-                primaryPagesContent: primaryPagesCall
-            })
-        });
-    }
-
-    
-
     componentWillMount() {
-        this.setContent();
+        PrismicSetNav(this);
     }
 
     render() {
-        let primaryPagesItems = this.getNavItems(this.state.primaryPagesContent);
-        
+
+        let navItemsMap = null;
+        if (this.state.docs) {
+            navItemsMap = this.state.docs.map((item) =>
+                <LinkContainer to={item.primary.item_link.uid}>
+                    <NavItem key={item.primary.item_link.uid}>
+                        <NavLink>{item.primary.item_title}</NavLink>
+                    </NavItem>
+                </LinkContainer>
+            );
+
+        }
 
         return (
             <Container>
@@ -74,13 +57,13 @@ class Header extends Component {
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
-                            {primaryPagesItems}
+                        {navItemsMap}
                         </Nav>
                     </Collapse>
-                </Navbar>
+                </Navbar>                
             </Container>
         )
     }
 }
 
-export default Header;
+export default NavBar;
