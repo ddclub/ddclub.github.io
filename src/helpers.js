@@ -9,6 +9,10 @@ export function linkResolver(doc) {
     // Define the url depending on the document type
     if (doc.type === 'page') {
         return '/page/' + doc.uid;
+    }else if (doc.type === 'footer') {
+        return '/footer/' + doc.uid;
+    }else if (doc.type === 'navigation') {
+        return '/navigation/' + doc.uid;
     }
 
     // Default to homepage
@@ -32,16 +36,17 @@ export function PrismicSetPage(cmp) {
 export function PrismicSetNav(cmp) {
 
     Prismic.api(apiEndpoint).then(api => {
-        api.getSingle('navbar').then(response => {
-            if (response) {
-                //console.log(response);
-                let pages = response.data.body;
+        api.query(Prismic.Predicates.at('my.navigation.slug', 'navbar')).then(response => {
+            if (response.results[0]) {
+                console.log(response);
+                let nav = response.results[0];
+                let pages = nav.data.body;
                 pages.forEach(item => {
                     if(item.primary.item_link.uid && 
                         item.primary.item_link.uid==='home')
                         item.primary.item_link.uid=''
                 });
-                cmp.setState({ docs: pages });
+                cmp.setState({ doc : nav, docs : pages });
             }
         });
     });
