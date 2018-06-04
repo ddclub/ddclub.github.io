@@ -16,16 +16,16 @@ class FooterLinkColumn extends Component {
             let itemLink = element.column_link.url;
 
             links.push(
-                <li><a href={itemLink}>{itemTitle}</a></li>
+                <li><small><a className="text-muted" href={itemLink}>{itemTitle}</a></small></li>
             );
         });
 
-        console.log(slice);
+        //console.log(slice);
 
         return (
             <div>
-                <h5>{columnHeaderText}</h5>
-                <ul>{links}</ul>
+                <h6>{columnHeaderText}</h6>
+                <ul className="list-unstyled">{links}</ul>
             </div>
         );
     }

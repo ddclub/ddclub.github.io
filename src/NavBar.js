@@ -39,13 +39,16 @@ class NavBar extends Component {
 
     render() {
         let navbarTitle = null;
+        let navbarImage = null;
         let navItemsMap = null;
         if (this.state.doc && this.state.docs) {
+            console.log(this.state.doc);
             navbarTitle = this.state.doc.data.navbar_title;
+            navbarImage = this.state.doc.data.navbar_image.url;
             navItemsMap = this.state.docs.map((item, index) =>
                 <LinkContainer to={item.primary.item_link.uid}>
                     <NavItem key={index}>
-                        <NavLink>{item.primary.item_title}</NavLink>
+                        <NavLink><h3>{item.primary.item_title}</h3></NavLink>
                     </NavItem>
                 </LinkContainer>
             );
@@ -54,7 +57,11 @@ class NavBar extends Component {
         return (
             <Container>
                 <Navbar light expand="md">
-                    <NavbarBrand href="/">{navbarTitle}</NavbarBrand>
+                    <NavbarBrand href="/">
+                    <span>
+                        <img width="140" height="70" src={navbarImage}></img> {navbarTitle}
+                    </span>
+                    </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
