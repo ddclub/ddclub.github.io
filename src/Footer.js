@@ -30,7 +30,7 @@ class Footer extends Component {
 
                     let columnComponentType = element.primary.component_type;
                     let columnContents = null;
-                    console.log(columnComponentType);
+                    //console.log(columnComponentType);
 
                     if (columnComponentType === 'footer_link_column') {
                         columnContents = <FooterLinkColumn slice={element} />;
@@ -44,7 +44,7 @@ class Footer extends Component {
             });
 
             return (
-                <footer className="appFooter">
+                <footer className="appFooter border-top shadow-sm">
                     <Container>
                         <Row className="justify-content-center">{columnsComponents}</Row>
                     </Container>
