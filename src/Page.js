@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'reactstrap';
 
 import PageHeaderSection from './PageHeaderSection.js';
 import PageParagraphSection from './PageParagraphSection.js';
+import PageImageCardSection from './PageImageCardSection';
 
 class Page extends Component {
 
@@ -49,6 +50,8 @@ class Page extends Component {
             sectionContents = <PageHeaderSection slice={element} />;
           } else if (sectionComponentType === 'paragraph_section') {
             sectionContents = <PageParagraphSection slice={element} />;
+          } else if (sectionComponentType === 'image_card_section') {
+            sectionContents = <PageImageCardSection slice={element} />;
           }
 
           if (sectionContents) {

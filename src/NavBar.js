@@ -42,7 +42,7 @@ class NavBar extends Component {
         let navbarImage = null;
         let navItemsMap = null;
         if (this.state.doc && this.state.docs) {
-            console.log(this.state.doc);
+            //console.log(this.state.doc);
             navbarTitle = this.state.doc.data.navbar_title;
             navbarImage = this.state.doc.data.navbar_image.url;
             navItemsMap = this.state.docs.map((item, index) =>

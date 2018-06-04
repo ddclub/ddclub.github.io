@@ -37,7 +37,7 @@ class Footer extends Component {
                     }
 
                     if (columnContents) {
-                        let column = <Col xs="auto">{columnContents}</Col>;
+                        let column = <Col sm="auto">{columnContents}</Col>;
                         columnsComponents.push(column);
                     }
                 }
