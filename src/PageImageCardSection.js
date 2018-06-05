@@ -21,11 +21,11 @@ class PageImageCardSection extends Component {
     
 
         return (
-            <Container>     
+            <CardColumns>     
                 
                 {cardsComponents}
                     
-            </Container>
+            </CardColumns>
         );
     }
 }

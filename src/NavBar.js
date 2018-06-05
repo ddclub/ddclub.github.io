@@ -6,7 +6,11 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
+    DropdownItem,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu
 } from 'reactstrap';
 import { Container } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -25,8 +29,8 @@ class NavBar extends Component {
             doc: null,
             docs: null
         };
-
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -37,38 +41,81 @@ class NavBar extends Component {
         PrismicSetNav(this);
     }
 
+    buildNavItem(item) {
+        return <LinkContainer to={item.primary.item_link.uid}>
+            <NavItem key={item.primary.item_link.uid}>
+                <NavLink><h3>{item.primary.item_title}</h3></NavLink>
+            </NavItem>
+        </LinkContainer>;
+    }
+
+    buildDropdown(element) {
+        let dropdownItems = [];
+        element.items.forEach(item => {
+
+            if (item.sub_item_link.uid && item.sub_item_title) {
+                dropdownItems.push(
+                    <LinkContainer to={item.sub_item_link.uid}>
+                    <DropdownItem key={item.sub_item_link.uid}>
+                        <NavLink>{item.sub_item_title}</NavLink>
+                    </DropdownItem>
+                    </LinkContainer>
+                );
+            }
+        });
+
+
+        let dropd = <UncontrolledDropdown nav inNavbar>
+            <h3><DropdownToggle nav caret>
+                {element.primary.item_title}
+            </DropdownToggle></h3>
+            <DropdownMenu right>
+                {dropdownItems}
+            </DropdownMenu>
+            
+        </UncontrolledDropdown>;
+
+        //console.log(dropdownItems);
+
+        return dropd;
+    }
+
     render() {
         let navbarTitle = null;
         let navbarImage = null;
-        let navItemsMap = null;
+        let navbarItems = null;
         if (this.state.doc && this.state.docs) {
             //console.log(this.state.doc);
             navbarTitle = this.state.doc.data.navbar_title;
             navbarImage = this.state.doc.data.navbar_image.url;
-            navItemsMap = this.state.docs.map((item, index) =>
-                <LinkContainer to={item.primary.item_link.uid}>
-                    <NavItem key={index}>
-                        <NavLink><h3>{item.primary.item_title}</h3></NavLink>
-                    </NavItem>
-                </LinkContainer>
-            );
+            navbarItems = [];
+            console.log(this.state.docs);
+
+            this.state.docs.forEach(item => {
+
+                if (item.primary.item_link.uid) {
+                    navbarItems.push(this.buildNavItem(item));
+                } else if (item.items && item.items.length > 0) {
+                    navbarItems.push(this.buildDropdown(item));
+                }
+            });
         }
 
         return (
             <Container>
                 <Navbar light expand="md">
                     <NavbarBrand href="/">
-                    <span>
-                        <img width="140" height="70" src={navbarImage}></img> {navbarTitle}
-                    </span>
+                        <span>
+                            <img width="140" height="70" src={navbarImage}></img> {navbarTitle}
+                        </span>
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
-                        {navItemsMap}
+                            {navbarItems}
                         </Nav>
                     </Collapse>
-                </Navbar>                
+                </Navbar>
             </Container>
         )
     }
