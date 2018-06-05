@@ -42,7 +42,7 @@ export function PrismicSetNav(cmp) {
                 let nav = response.results[0];
                 let pages = nav.data.body;
                 pages.forEach(item => {
-                    if(item.primary.item_link.uid)
+                    if(item.primary.item_link && item.primary.item_link.uid)
                         item.primary.item_link.uid='/'+item.primary.item_link.uid; //lets navbar active link work
                 });
                 cmp.setState({ doc : nav, docs : pages });

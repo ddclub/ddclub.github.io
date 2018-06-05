@@ -1,7 +1,7 @@
 {
   "name": "ddclub.github.io",
   "homepage": "https://ddclub.github.io",
-  "version": "0.2.44",
+  "version": "0.2.45",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",

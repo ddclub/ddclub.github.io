@@ -14,19 +14,16 @@ class ImageCard extends Component {
         console.log(card);
 
         return (
-            <Row className="justify-content-center">
-                <Col sm="12" md="6">
                     <Card>
+                    <Col sm="12" md="6">
                         {card.card_image.url && <CardImg top width="100%" src={card.card_image.url} alt={card.card_title} />}
                         <CardBody>
                             {card.card_title && <CardTitle>{card.card_title}</CardTitle>}
                             {card.card_subtitle && <CardSubtitle className="text-muted mb-2">{card.card_subtitle}</CardSubtitle>}
                             {card.card_text && <CardText>{RichText.render(card.card_text, this.linkResolver)}</CardText>}
                         </CardBody>
+                        </Col>
                     </Card>
-
-                </Col>
-            </Row>
         );
     }
 
