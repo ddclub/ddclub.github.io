@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "buttercms": "^1.1.1",
     "react": "^16.4.0",
     "react-delay-render": "^0.1.2",
     "react-dom": "^16.4.0",
