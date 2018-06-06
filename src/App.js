@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import Header from './Header';
 import Footer from './Footer';
 import Page from './Page';
 
-
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
-        <div className="App">
-          <Header />
-          
-            <Route exact path="/" component={Page}/>
-            <Route exact path="/:slug" component={Page} />
-
-          <Footer />
+      <div className="App">
+        <Header />
+        <div className="appContent">
+        <Switch>
+          <Route exact path={`${process.env.PUBLIC_URL}/`}  component={Page} />
+          <Route path={`${process.env.PUBLIC_URL}/:slug`}  component={Page} />
+          <Route component={Page} />
+        </Switch>
         </div>
-      </BrowserRouter>
+        <Footer />
+      </div>
     );
   }
 }

@@ -1,33 +1,68 @@
-.header {
-  background-color: #f5f5f5;
+
+
+/* App */
+.App {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  min-height: 60px; 
-  line-height: 60px; 
-  background-color: #f5f5f5;
+.appContent {
+  flex: 1;
 }
 
-.page {
-  padding: 20px;
+
+
+
+/* Header */
+.appHeader {
+  font-family: 'Khand', sans-serif;
+  text-transform: uppercase;
+  /*
+  padding: 2vh;
+  
+   background-color: #b7e8f4; */
 }
 
-.pageHeader {
-  padding: 20px;
-  background-color: #f5f5f5;
-}
-
-.pageBody {
-  padding: 20px;
-}
-
-.img-fluid {
+.navbarImage {
+  height: 100%;
   width: auto;
+  padding: 15px;
 }
 
-.butter-img {
-  height: 1em;
+.border-top { border-top: 1px solid #e5e5e5; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+
+.box-shadow { box-shadow: 0px 5px 5px rgba(0, 0, 0, .05); }
+
+
+
+
+/* Footer */
+.appFooter {
+  padding: 2vh;
+  padding-top: 4vh;
+  /* background-color: #f5f5f5; */
+  
+}
+
+/* Page */
+.pageSections {
+  padding: 2vh;
+}
+
+.pageSection {
+  padding-bottom: 1vh;
+  padding-bottom: 1%;
+}
+
+.pageHeaderSectionText {
+  font-family: 'Khand', sans-serif;
+  text-transform: uppercase;
+}
+
+
+.card-img-top {
+  width: 100%;
+  object-fit: cover;
 }

@@ -6,15 +6,19 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink
+    NavLink,
+    DropdownItem,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu
 } from 'reactstrap';
 import { Container } from 'reactstrap';
-import Butter from 'buttercms';
 import { LinkContainer } from 'react-router-bootstrap';
+import { Link, RichText, Date } from 'prismic-reactjs';
+import Prismic from 'prismic-javascript';
+import { linkResolver, PrismicSetNav } from './helpers';
 
-const butter = Butter('1ab2db4f14c0c5e4d4f221ca8702b0960f9b6ee8');
-
-class Header extends Component {
+class NavBar extends Component {
 
     constructor(props) {
         super(props);
@@ -22,59 +26,93 @@ class Header extends Component {
         this.toggle = this.toggle.bind(this);
         this.state = {
             isOpen: false,
-            primaryPagesContent: null
+            doc: null,
+            docs: null
         };
     }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
 
-    getNavItems(content){
-        let PrimaryPagesNavItems = content;
-        if (content) {
-            PrimaryPagesNavItems = content.map((pageItem) =>
-                <LinkContainer to={pageItem.pageLink}>
-                    <NavItem key={pageItem.fields.page_id}>
-                        <NavLink>{pageItem.fields.nav_name}</NavLink>
-                    </NavItem>
-                </LinkContainer>);
-        }
-        return PrimaryPagesNavItems;
-    }
-
-    setContent() {
-        butter.page.list('primary_page').then((resp) => {
-            let primaryPagesCall = resp.data.data;
-            let startlink = "/";
-            primaryPagesCall.forEach(function (obj) { obj.pageLink = startlink.concat(obj.slug); });
-            primaryPagesCall.sort(function (a, b) { return a.fields.page_id > b.fields.page_id });
-
-            this.setState({
-                primaryPagesContent: primaryPagesCall
-            })
-        });
-    }
-
-    
-
     componentWillMount() {
-        this.setContent();
+        PrismicSetNav(this);
+    }
+
+    buildNavItem(item) {
+        return <LinkContainer to={item.primary.item_link.uid}>
+            <NavItem key={item.primary.item_link.uid}>
+                <NavLink><h3>{item.primary.item_title}</h3></NavLink>
+            </NavItem>
+        </LinkContainer>;
+    }
+
+    buildDropdown(element) {
+        let dropdownItems = [];
+        element.items.forEach(item => {
+
+            if (item.sub_item_link.uid && item.sub_item_title) {
+                dropdownItems.push(
+                    <LinkContainer to={item.sub_item_link.uid}>
+                    <DropdownItem key={item.sub_item_link.uid}>
+                        <NavLink>{item.sub_item_title}</NavLink>
+                    </DropdownItem>
+                    </LinkContainer>
+                );
+            }
+        });
+
+
+        let dropd = <UncontrolledDropdown nav inNavbar>
+            <h3><DropdownToggle nav caret>
+                {element.primary.item_title}
+            </DropdownToggle></h3>
+            <DropdownMenu right>
+                {dropdownItems}
+            </DropdownMenu>
+            
+        </UncontrolledDropdown>;
+
+        //console.log(dropdownItems);
+
+        return dropd;
     }
 
     render() {
-        let primaryPagesItems = this.getNavItems(this.state.primaryPagesContent);
-        
+        let navbarTitle = null;
+        let navbarImage = null;
+        let navbarItems = null;
+        if (this.state.doc && this.state.docs) {
+            //console.log(this.state.doc);
+            navbarTitle = this.state.doc.data.navbar_title;
+            navbarImage = this.state.doc.data.navbar_image.url;
+            navbarItems = [];
+            console.log(this.state.docs);
+
+            this.state.docs.forEach(item => {
+
+                if (item.primary.item_link.uid) {
+                    navbarItems.push(this.buildNavItem(item));
+                } else if (item.items && item.items.length > 0) {
+                    navbarItems.push(this.buildDropdown(item));
+                }
+            });
+        }
 
         return (
             <Container>
                 <Navbar light expand="md">
-                    <NavbarBrand href="/">Double Degree Club</NavbarBrand>
+                    <NavbarBrand href="/">
+                        <span>
+                            <img width="140" height="70" src={navbarImage}></img> {navbarTitle}
+                        </span>
+                    </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
-                            {primaryPagesItems}
+                            {navbarItems}
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -83,4 +121,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default NavBar;
