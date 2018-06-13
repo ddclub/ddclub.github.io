@@ -15,14 +15,15 @@ class ImageCard extends Component {
 
         return (
                     <Card>
-                    <Col sm="12" md="6">
+                        <Col sm="12" md="6">
                         {card.card_image.url && <CardImg top width="100%" src={card.card_image.url} alt={card.card_title} />}
+                        </Col>
                         <CardBody>
                             {card.card_title && <CardTitle>{card.card_title}</CardTitle>}
                             {card.card_subtitle && <CardSubtitle className="text-muted mb-2">{card.card_subtitle}</CardSubtitle>}
                             {card.card_text && <CardText>{RichText.render(card.card_text, this.linkResolver)}</CardText>}
                         </CardBody>
-                        </Col>
+                        
                     </Card>
         );
     }
