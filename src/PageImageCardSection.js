@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, CardColumns } from 'reactstrap';
-import { PrismicSetFooter } from './helpers';
-import FooterLinkColumn from './FooterLinkColumn';
 import ImageCard from './ImageCard';
 class PageImageCardSection extends Component {
 
