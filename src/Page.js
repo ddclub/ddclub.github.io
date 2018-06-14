@@ -32,6 +32,7 @@ class Page extends Component {
 
     render() {
         let document = this.state.doc;
+        console.log(document);
 
         if (document) {
             let sections = document.data.body;
