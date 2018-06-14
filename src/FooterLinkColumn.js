@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import Prismic from 'prismic-javascript';
-import { Link, RichText, Date } from 'prismic-reactjs';
+import { RichText } from 'prismic-reactjs';
 
 class FooterLinkColumn extends Component {
 

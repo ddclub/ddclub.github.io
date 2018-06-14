@@ -8,15 +8,16 @@ import Page from './Page';
 
 class App extends Component {
   render() {
+
     return (
       <div className="App">
         <Header />
         <div className="appContent">
-        <Switch>
-          <Route exact path={`${process.env.PUBLIC_URL}/`}  component={Page} />
-          <Route path={`${process.env.PUBLIC_URL}/:slug`}  component={Page} />
-          <Route component={Page} />
-        </Switch>
+          <Switch>
+            <Route exact path='/' component={Page} />
+            <Route path='/:slug' component={Page} />
+            <Route component={Page} />
+          </Switch>
         </div>
         <Footer />
       </div>
