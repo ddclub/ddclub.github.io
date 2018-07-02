@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { RichText } from 'prismic-reactjs';
+import { RenderRichText } from './PrismicContent';
 
 class PageHeaderSection extends Component {
 
@@ -14,7 +14,7 @@ class PageHeaderSection extends Component {
                     <div className="text-center">
                         {headerText &&
                             <div>
-                                {RichText.render(headerText, this.linkResolver)}
+                                {RenderRichText(headerText)}
                             </div>
                         }
                     </div>

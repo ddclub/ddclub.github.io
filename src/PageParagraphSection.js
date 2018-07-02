@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { RichText } from 'prismic-reactjs';
+import { RenderRichText } from './PrismicContent';
 
 class PageParagraphSection extends Component {
 
@@ -18,12 +18,12 @@ class PageParagraphSection extends Component {
                     <div>
                         {paragraphHeaderText &&
                             <div>
-                                {RichText.render(paragraphHeaderText, this.linkResolver)}
+                                {RenderRichText(paragraphHeaderText)}
                             </div>
                         }
                         {paragraphText &&
                             <div>
-                                {RichText.render(paragraphText, this.linkResolver)}
+                                {RenderRichText(paragraphText)}
                             </div>
                         }
                     </div>
