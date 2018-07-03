@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    Container, Row, Col, Card, CardImg, CardText, CardBody, CardLink,
+    Card, CardImg, CardBody,
     CardTitle, CardSubtitle
 } from 'reactstrap';
 import { RenderRichText } from './PrismicContent';

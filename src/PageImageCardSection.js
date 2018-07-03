@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, CardColumns } from 'reactstrap';
+import { CardColumns } from 'reactstrap';
 import ImageCard from './ImageCard';
 class PageImageCardSection extends Component {
 

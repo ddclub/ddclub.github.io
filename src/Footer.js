@@ -8,7 +8,8 @@ class Footer extends Component {
         super(props);
 
         this.state = {
-            doc: null
+            doc: null,
+            api: null
         };
     }
 

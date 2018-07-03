@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from './Header';
 import Footer from './Footer';
 import Page from './Page';
+import Preview from './Preview';
 
 class App extends Component {
   render() {
@@ -14,9 +15,9 @@ class App extends Component {
         <Header />
         <div className="appContent">
           <Switch>
-            <Route exact path='/' component={Page} />
-            <Route path='/:slug' component={Page} />
-            <Route component={Page} />
+            <Route exact path='/' render={routeProps => <Page {...routeProps} />} />
+            <Route exact path="/preview" render={routeProps => <Preview {...routeProps} />} />
+            <Route path='/pages/:slug' render={routeProps => <Page {...routeProps} />} />
           </Switch>
         </div>
         <Footer />
