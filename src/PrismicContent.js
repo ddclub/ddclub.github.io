@@ -1,52 +1,92 @@
 import Prismic from 'prismic-javascript';
+import React from 'react';
 import PrismicConfig from './PrismicConfig';
+import { RichText } from 'prismic-reactjs';
+import Cookies from 'js-cookie';
+
 
 //Add your own endpoint here
 const apiEndpoint = PrismicConfig.apiEndpoint;
+const Elements = RichText.Elements;
 
 // Link Resolver
 export function linkResolver(doc) {
     // Define the url depending on the document type
-    if (doc.type === 'page') {
-        return '/page/' + doc.uid;
-    } else if (doc.type === 'footer') {
-        return '/footer/' + doc.uid;
-    } else if (doc.type === 'navigation') {
-        return '/navigation/' + doc.uid;
-    } else if (doc.type === 'blog_post') {
-        return '/navigation/' + doc.uid;
+    if(doc.type && doc.uid && doc.type === 'page'){
+        return '/pages/' + doc.uid;
+    } else if (doc.uid) {
+        return '/' + doc.uid;
     }
-
+    
     // Default to homepage
     return '/';
 }
 
+// -- Function to add unique key to props
+function propsWithUniqueKey(props, key) {
+    return Object.assign(props || {}, { key });
+}
+
+export function refreshToolbar(cmp) {
+    // Start an experiment if there is one
+    const maybeCurrentExperiment = cmp.state.api.currentExperiment();
+    if (maybeCurrentExperiment) {
+        window.PrismicToolbar.startExperiment(maybeCurrentExperiment.googleId());
+    }
+
+    // Launch the prismic.io toolbar
+    window.PrismicToolbar.setup(apiEndpoint);
+}
+
+// -- HTML Serializer
+
+export function RenderRichText(txt) {
+    return RichText.render(txt, linkResolver);
+}
+
+function getRef(api) {
+    const previewRef = Cookies.get(Prismic.previewCookie);
+    const masterRef = api.refs.find(ref => { return ref.isMasterRef === true }).ref;
+    const ref = previewRef || masterRef;
+    return ref;
+
+}
+
 export function PrismicSetPage(cmp) {
     let slug = cmp.props.match.params.slug;
-    if (!slug || slug === '') slug = 'home';
+    if (!slug || slug === '' || slug === '/') slug = 'home';
     Prismic.api(apiEndpoint).then(api => {
-        api.query(Prismic.Predicates.at('my.page.uid', slug)).then(response => {
+        const ref = getRef(api);
+        api.query(Prismic.Predicates.at('my.page.uid', slug), { ref: ref }).then(response => {
             if (response) {
-                cmp.setState({ doc: response.results[0] });
+                cmp.setState({
+                    doc: response.results[0],
+                    api: api
+                });
             }
         });
     });
 }
 
-
 //create a 'navigation' content with a slug 'navbar' to use as the main navbar
 export function PrismicSetNav(cmp, navslug) {
     let navsluglocation = 'my.navigation.slug';
     Prismic.api(apiEndpoint).then(api => {
-        api.query(Prismic.Predicates.at(navsluglocation, navslug)).then(response => {
+        const ref = getRef(api);
+        api.query(Prismic.Predicates.at(navsluglocation, navslug), { ref: ref }).then(response => {
             if (response.results[0]) {
                 let nav = response.results[0];
                 let pages = nav.data.body;
                 pages.forEach(item => {
-                    if (item.primary.item_link && item.primary.item_link.uid)
-                        item.primary.item_link.uid = '/' + item.primary.item_link.uid; //lets navbar active link work
+                    if (item.primary.item_link && item.primary.item_link.uid) {
+                        item.primary.item_link.uid = '/pages/' + item.primary.item_link.uid; //lets navbar active link work
+                    } else if (item.items) {
+                        item.items.forEach(subitem => {
+                            subitem.sub_item_link.uid = '/pages/' + subitem.sub_item_link.uid;
+                        });
+                    }
                 });
-                cmp.setState({ doc: nav, docs: pages });
+                cmp.setState({ doc: nav, docs: pages, api: api });
             }
         });
     });
@@ -57,9 +97,10 @@ export function PrismicSetFooter(cmp, footerslug) {
     let footersluglocation = 'my.footer.slug';
 
     Prismic.api(apiEndpoint).then(api => {
-        api.query(Prismic.Predicates.at(footersluglocation, footerslug)).then(response => {
+        const ref = getRef(api);
+        api.query(Prismic.Predicates.at(footersluglocation, footerslug), { ref: ref }).then(response => {
             if (response.results[0]) {
-                cmp.setState({ doc: response.results[0] });
+                cmp.setState({ doc: response.results[0], api: api });
             }
         });
     });

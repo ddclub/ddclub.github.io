@@ -25,7 +25,8 @@ class NavBar extends Component {
         this.state = {
             isOpen: false,
             doc: null,
-            docs: null
+            docs: null,
+            api: null
         };
     }
 
@@ -50,7 +51,6 @@ class NavBar extends Component {
     buildDropdown(element) {
         let dropdownItems = [];
         element.items.forEach(item => {
-
             if (item.sub_item_link.uid && item.sub_item_title) {
                 dropdownItems.push(
                     <LinkContainer to={item.sub_item_link.uid}>
@@ -100,7 +100,7 @@ class NavBar extends Component {
             return (
                 <Container>
                     <Navbar light expand="md">
-                        <NavbarBrand href="#/home">
+                        <NavbarBrand href="/">
                             <span>
                                 {navbarImage &&
                                     <img width="140" height="70" alt="" src={navbarImage}></img>} {navbarTitle}

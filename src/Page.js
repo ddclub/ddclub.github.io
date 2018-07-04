@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { PrismicSetPage } from './PrismicContent';
-import { Container, Row, Col } from 'reactstrap';
+import { PrismicSetPage, refreshToolbar } from './PrismicContent';
+import { Container } from 'reactstrap';
 
 import PageHeaderSection from './PageHeaderSection.js';
 import PageParagraphSection from './PageParagraphSection.js';
@@ -13,7 +13,8 @@ class Page extends Component {
         super(props);
 
         this.state = {
-            doc: null
+            doc: null,
+            api: null
         };
     }
 
@@ -22,6 +23,7 @@ class Page extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        refreshToolbar(this);
         if (snapshot !== null) {
             let slug = this.props.match.params.slug;
             let prevslug = prevProps.match.params.slug;
@@ -32,6 +34,7 @@ class Page extends Component {
 
     render() {
         let document = this.state.doc;
+        //console.log(document);
 
         if (document) {
             let sections = document.data.body;

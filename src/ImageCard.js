@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import {
-    Container, Row, Col, Card, CardImg, CardText, CardBody, CardLink,
+    Card, CardImg, CardBody,
     CardTitle, CardSubtitle
 } from 'reactstrap';
-import { RichText } from 'prismic-reactjs';
+import { RenderRichText } from './PrismicContent';
 
 class ImageCard extends Component {
 
@@ -15,7 +15,7 @@ class ImageCard extends Component {
                     <CardBody>
                         {card.card_title && <CardTitle>{card.card_title}</CardTitle>}
                         {card.card_subtitle && <CardSubtitle className="text-muted mb-2">{card.card_subtitle}</CardSubtitle>}
-                        {card.card_text && <CardText>{RichText.render(card.card_text, this.linkResolver)}</CardText>}
+                        {card.card_text && RenderRichText(card.card_text)}
                     </CardBody>    
             </Card>
         );

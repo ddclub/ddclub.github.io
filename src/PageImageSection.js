@@ -5,7 +5,7 @@ class PageImageSection extends Component {
 
     render() {
         let slice = this.props.slice;
-        console.log(slice);
+        //console.log(slice);
         let imgsrc = null;
         let imgdesc = null;
         let imgalt = null;
