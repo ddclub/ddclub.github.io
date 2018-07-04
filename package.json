@@ -1,10 +1,11 @@
 {
   "name": "ddclub.github.io",
   "homepage": "https://ddclub.github.io",
-  "version": "0.2.65",
+  "version": "0.2.66",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "js-cookie": "^2.2.0",
     "prismic-javascript": "^1.5.0-beta.3",
     "prismic-reactjs": "^0.3.1",
     "react": "^16.4.0",
