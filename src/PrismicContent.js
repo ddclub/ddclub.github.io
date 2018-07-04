@@ -1,30 +1,25 @@
 import Prismic from 'prismic-javascript';
 import React from 'react';
+import Cookies from 'js-cookie';
+import qs from 'qs';
 import PrismicConfig from './PrismicConfig';
 import { RichText } from 'prismic-reactjs';
-import Cookies from 'js-cookie';
-
 
 //Add your own endpoint here
 const apiEndpoint = PrismicConfig.apiEndpoint;
-const Elements = RichText.Elements;
+const PREVIEW_EXPIRES = 1 / 48; // 30 minutes
 
 // Link Resolver
 export function linkResolver(doc) {
     // Define the url depending on the document type
-    if(doc.type && doc.uid && doc.type === 'page'){
+    if (doc.type && doc.uid && doc.type === 'page') {
         return '/pages/' + doc.uid;
     } else if (doc.uid) {
         return '/' + doc.uid;
     }
-    
+
     // Default to homepage
     return '/';
-}
-
-// -- Function to add unique key to props
-function propsWithUniqueKey(props, key) {
-    return Object.assign(props || {}, { key });
 }
 
 export function refreshToolbar(cmp) {
@@ -38,7 +33,17 @@ export function refreshToolbar(cmp) {
     window.PrismicToolbar.setup(apiEndpoint);
 }
 
-// -- HTML Serializer
+export function PrismicStartPreview(cmp) {
+    const params = qs.parse(cmp.props.location.search.slice(1));
+    //console.log(params);
+    Prismic.api(apiEndpoint).then(api => {
+        api.previewSession(params.token, linkResolver, '/').then((url) => {
+            console.log('Preview started');
+            Cookies.set(Prismic.previewCookie, params.token, { expires: PREVIEW_EXPIRES });
+            cmp.props.history.push(url);
+        });
+    });
+}
 
 export function RenderRichText(txt) {
     return RichText.render(txt, linkResolver);
@@ -49,7 +54,6 @@ function getRef(api) {
     const masterRef = api.refs.find(ref => { return ref.isMasterRef === true }).ref;
     const ref = previewRef || masterRef;
     return ref;
-
 }
 
 export function PrismicSetPage(cmp) {

@@ -6,6 +6,7 @@ import PageHeaderSection from './PageHeaderSection.js';
 import PageParagraphSection from './PageParagraphSection.js';
 import PageImageCardSection from './PageImageCardSection';
 import PageImageSection from './PageImageSection';
+import PageBlogSection from './PageBlogSection';
 
 class Page extends Component {
 
@@ -55,6 +56,8 @@ class Page extends Component {
                         sectionContents = <PageImageCardSection slice={element} />;
                     } else if (sectionComponentType === 'image_section') {
                         sectionContents = <PageImageSection slice={element} />;
+                    } else if (sectionComponentType === 'blog_section') {
+                        sectionContents = <PageBlogSection slice={element} />;
                     }
 
                     if (sectionContents) {
