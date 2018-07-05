@@ -1,7 +1,7 @@
 {
-  "name": "ddclub.github.io",
-  "homepage": "https://ddclub.github.io",
-  "version": "0.2.67",
+  "name": "ddclub",
+  "homepage": "https://ddclub.netlify.com",
+  "version": "0.2.68",
   "private": true,
   "dependencies": {
     "bootstrap": "^4.1.1",
