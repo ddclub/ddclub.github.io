@@ -13,13 +13,13 @@ const PREVIEW_EXPIRES = 1 / 48; // 30 minutes
 export function linkResolver(doc) {
     // Define the url depending on the document type
     if (doc.type && doc.uid && doc.type === 'page') {
-        return '/pages/' + doc.uid;
+        return '/#/pages/' + doc.uid;
     } else if (doc.uid) {
-        return '/' + doc.uid;
+        return '/#/' + doc.uid;
     }
 
     // Default to homepage
-    return '/';
+    return '/#/';
 }
 
 export function refreshToolbar(cmp) {
