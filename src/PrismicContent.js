@@ -37,7 +37,7 @@ export function PrismicStartPreview(cmp) {
     const params = qs.parse(cmp.props.location.search.slice(1));
     //console.log(params);
     Prismic.api(apiEndpoint).then(api => {
-        api.previewSession(params.token, linkResolver, '/').then((url) => {
+        api.previewSession(params.token, (doc => {return '/pages/'+doc.uid}), '/').then((url) => {
             console.log('Preview started');
             Cookies.set(Prismic.previewCookie, params.token, { expires: PREVIEW_EXPIRES });
             cmp.props.history.push(url);
