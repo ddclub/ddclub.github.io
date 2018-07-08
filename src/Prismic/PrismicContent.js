@@ -1,8 +1,8 @@
 import Prismic from 'prismic-javascript';
-import React from 'react';
+import { } from 'react';
 import Cookies from 'js-cookie';
 import qs from 'qs';
-import PrismicConfig from './PrismicConfig';
+import PrismicConfig from '../Prismic/PrismicConfig';
 import { RichText } from 'prismic-reactjs';
 
 //Add your own endpoint here

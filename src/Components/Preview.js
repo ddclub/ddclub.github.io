@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Prismic from 'prismic-javascript';
-import PrismicConfig from './PrismicConfig';
-import { PrismicStartPreview, refreshToolbar } from './PrismicContent.js';
+import { PrismicStartPreview, refreshToolbar } from '../Prismic/PrismicContent';
 
 export default class Preview extends React.Component {
 
