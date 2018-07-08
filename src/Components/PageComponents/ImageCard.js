@@ -3,7 +3,7 @@ import {
     Card, CardImg, CardBody,
     CardTitle, CardSubtitle
 } from 'reactstrap';
-import { RenderRichText } from './PrismicContent';
+import { RenderRichText } from './../../Prismic/PrismicContent';
 
 class ImageCard extends Component {
 
@@ -15,7 +15,7 @@ class ImageCard extends Component {
                     <CardBody>
                         {card.card_title && <CardTitle>{card.card_title}</CardTitle>}
                         {card.card_subtitle && <CardSubtitle className="text-muted mb-2">{card.card_subtitle}</CardSubtitle>}
-                        {card.card_text && RenderRichText(card.card_text)}
+                        {card.card_text && <div>{RenderRichText(card.card_text)}</div>}
                     </CardBody>    
             </Card>
         );

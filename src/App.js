@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { Switch, Route } from "react-router-dom";
 
-import Header from './Header';
-import Footer from './Footer';
-import Page from './Page';
-import Preview from './Preview';
+import Header from './Components/Header.js';
+import Footer from './Components/Footer.js';
+import Page from './Components/Page.js';
+import Preview from './Components/Preview.js';
 
 class App extends Component {
   render() {

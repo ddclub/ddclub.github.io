@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { PrismicSetPage, refreshToolbar } from './PrismicContent';
+import { PrismicSetPage, refreshToolbar } from '../Prismic/PrismicContent';
 import { Container } from 'reactstrap';
 
-import PageHeaderSection from './PageHeaderSection.js';
-import PageParagraphSection from './PageParagraphSection.js';
-import PageImageCardSection from './PageImageCardSection';
-import PageImageSection from './PageImageSection';
-import PageBlogSection from './PageBlogSection';
+import PageHeaderSection from './PageComponents/PageHeaderSection';
+import PageParagraphSection from './PageComponents/PageParagraphSection';
+import PageImageCardSection from './PageComponents/PageImageCardSection';
+import PageImageSection from './PageComponents/PageImageSection';
+import PageBlogSection from './PageComponents/PageBlogSection';
 
 class Page extends Component {
 

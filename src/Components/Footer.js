@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { PrismicSetFooter } from './PrismicContent';
-import FooterLinkColumn from './FooterLinkColumn';
+import { PrismicSetFooter } from '../Prismic/PrismicContent';
+import FooterLinkColumn from './FooterComponents/FooterLinkColumn';
 class Footer extends Component {
 
     constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
-import { RenderRichText } from './PrismicContent';
+import { RenderRichText } from './../../Prismic/PrismicContent';
 
 class PageHeaderSection extends Component {
 

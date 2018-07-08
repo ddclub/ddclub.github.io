@@ -14,7 +14,7 @@ import {
 } from 'reactstrap';
 import { Container } from 'reactstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import { PrismicSetNav } from './PrismicContent';
+import { PrismicSetNav } from '../Prismic/PrismicContent';
 
 class NavBar extends Component {
 
@@ -99,7 +99,7 @@ class NavBar extends Component {
             });
             return (
                 <Container>
-                    <Navbar light expand="md">
+                    <Navbar light expand="lg">
                         <NavbarBrand href="/">
                             <span>
                                 {navbarImage &&
@@ -118,7 +118,6 @@ class NavBar extends Component {
         }
 
         return <div></div>;
-
     }
 }
 

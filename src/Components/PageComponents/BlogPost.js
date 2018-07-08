@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { row } from 'reactstrap';
-import { RenderRichText } from './PrismicContent';
+import { } from 'reactstrap';
+import { } from './../../Prismic/PrismicContent';
 
 class BlogPost extends Component {
 
