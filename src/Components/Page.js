@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { PrismicSetPage, refreshToolbar } from '../Prismic/PrismicContent';
-import { Container } from 'reactstrap';
+import { Container, Row } from 'reactstrap';
 
 import PageHeaderSection from './PageComponents/PageHeaderSection';
 import PageParagraphSection from './PageComponents/PageParagraphSection';
@@ -70,9 +70,10 @@ class Page extends Component {
 
             return (
                 <Container className="pageSections">
-                    {sectionsComponents}
+                    <div data-wio-id={document.id}>
+                        {sectionsComponents}
+                    </div>
                 </Container>
-
             );
         }
         return <div></div>;

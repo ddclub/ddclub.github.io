@@ -37,7 +37,7 @@ export function PrismicStartPreview(cmp) {
     const params = qs.parse(cmp.props.location.search.slice(1));
     //console.log(params);
     Prismic.api(apiEndpoint).then(api => {
-        api.previewSession(params.token, (doc => {return '/pages/'+doc.uid}), '/').then((url) => {
+        api.previewSession(params.token, (doc => { return '/pages/' + doc.uid }), '/').then((url) => {
             console.log('Preview started');
             Cookies.set(Prismic.previewCookie, params.token, { expires: PREVIEW_EXPIRES });
             cmp.props.history.push(url);
@@ -79,8 +79,9 @@ export function PrismicSetNav(cmp, navslug) {
         const ref = getRef(api);
         api.query(Prismic.Predicates.at(navsluglocation, navslug), { ref: ref }).then(response => {
             if (response.results[0]) {
-                let nav = response.results[0];
-                let pages = nav.data.body;
+                let doc = response.results[0];
+                console.log(doc.id);
+                let pages = doc.data.body;
                 pages.forEach(item => {
                     if (item.primary.item_link && item.primary.item_link.uid) {
                         item.primary.item_link.uid = '/pages/' + item.primary.item_link.uid; //lets navbar active link work
@@ -90,7 +91,7 @@ export function PrismicSetNav(cmp, navslug) {
                         });
                     }
                 });
-                cmp.setState({ doc: nav, docs: pages, api: api });
+                cmp.setState({ doc: doc, docs: pages, api: api });
             }
         });
     });

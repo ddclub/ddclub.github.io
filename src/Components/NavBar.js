@@ -72,8 +72,6 @@ class NavBar extends Component {
 
         </UncontrolledDropdown>;
 
-        //console.log(dropdownItems);
-
         return dropd;
     }
 
@@ -82,23 +80,22 @@ class NavBar extends Component {
         let navbarImage = null;
         let navbarItems = null;
         if (this.state.doc && this.state.docs) {
-            //console.log(this.state.doc);
-            navbarTitle = this.state.doc.data.navbar_title;
-            navbarImage = this.state.doc.data.navbar_image.url;
+            let document = this.state.doc;
+            navbarTitle = document.data.navbar_title;
+            navbarImage = document.data.navbar_image.url;
             navbarItems = [];
-            //console.log(this.state.docs);
 
             this.state.docs.forEach(item => {
 
                 if (item.primary.item_link.uid) {
-                    //console.log(item.primary.item_link.uid);
                     navbarItems.push(this.buildNavItem(item));
                 } else if (item.items && item.items.length > 0) {
                     navbarItems.push(this.buildDropdown(item));
                 }
             });
+
             return (
-                <Container>
+                <div> 
                     <Navbar light expand="lg">
                         <NavbarBrand href="/">
                             <span>
@@ -110,10 +107,11 @@ class NavBar extends Component {
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav navbar>
                                 {navbarItems}
+                                <div data-wio-id={document.id}/>
                             </Nav>
                         </Collapse>
                     </Navbar>
-                </Container>
+                </div>
             );
         }
 
