@@ -8,7 +8,7 @@ class Footer extends Component {
         super(props);
 
         this.state = {
-            doc: null,
+            document: null,
             api: null
         };
     }
@@ -47,7 +47,10 @@ class Footer extends Component {
             return (
                 <footer className="appFooter border-top shadow-sm">
                     <Container>
-                        <Row className="justify-content-center">{columnsComponents}</Row>
+                        <Row className="justify-content-center">
+                            {columnsComponents}
+                            <div data-wio-id={document.id} />
+                        </Row>
                     </Container>
                 </footer>
             );
