@@ -8,6 +8,7 @@ class BlogPost extends Component {
         let post = this.props.post;
         return (
             <div>
+                <p>post.title</p>
             </div>
         );
     }

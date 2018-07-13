@@ -72,6 +72,22 @@ export function PrismicSetPage(cmp) {
     });
 }
 
+export function PrismicSetBlogs(cmp) {
+    let slug = cmp.props.match.params.slug;
+    if (!slug || slug === '' || slug === '/') slug = 'home';
+    Prismic.api(apiEndpoint).then(api => {
+        const ref = getRef(api);
+        api.query(Prismic.Predicates.at('my.blog_post.blogid', slug), { ref: ref }).then(response => {
+            if (response) {
+                cmp.setState({
+                    docs: response.results,
+                    api: api
+                });
+            }
+        });
+    });
+}
+
 //create a 'navigation' content with a slug 'navbar' to use as the main navbar
 export function PrismicSetNav(cmp, navslug) {
     let navsluglocation = 'my.navigation.slug';
