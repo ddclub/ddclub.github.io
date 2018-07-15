@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PrismicSetPage, refreshToolbar } from '../Prismic/PrismicContent';
 import { Container, Row } from 'reactstrap';
 import Helmet from 'react-helmet';
+import PrismicConfig from '../Prismic/PrismicConfig';
 
 import PageHeaderSection from './PageComponents/PageHeaderSection';
 import PageParagraphSection from './PageComponents/PageParagraphSection';
@@ -69,14 +70,11 @@ class Page extends Component {
                 }
             });
 
-            console.log(document.data.title);
             return (
                 <Container className="pageSections">
-                    {document.data.title &&
-                        <Helmet>
-                            <title>{document.data.title}</title>
+                    <Helmet>
+                        <title>{document.data.title && document.data.title+' - '}{PrismicConfig.siteTitle}</title>
                         </Helmet>
-                    }
                     <div data-wio-id={document.id}>
                         {sectionsComponents}
                     </div>
