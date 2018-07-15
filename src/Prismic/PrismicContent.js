@@ -38,7 +38,7 @@ export function PrismicStartPreview(cmp) {
     //console.log(params);
     Prismic.api(apiEndpoint).then(api => {
         api.previewSession(params.token, (doc => { return '/pages/' + doc.uid }), '/').then((url) => {
-            console.log('Preview started');
+            //console.log('Preview started');
             Cookies.set(Prismic.previewCookie, params.token, { expires: PREVIEW_EXPIRES });
             cmp.props.history.push(url);
         });
@@ -80,7 +80,7 @@ export function PrismicSetNav(cmp, navslug) {
         api.query(Prismic.Predicates.at(navsluglocation, navslug), { ref: ref }).then(response => {
             if (response.results[0]) {
                 let doc = response.results[0];
-                console.log(doc.id);
+                //console.log(doc.id);
                 let pages = doc.data.body;
                 pages.forEach(item => {
                     if (item.primary.item_link && item.primary.item_link.uid) {
