@@ -16,10 +16,10 @@
   font-family: 'Khand', sans-serif;
   text-transform: uppercase;
   font-size: 2rem;
-
+  /*
   padding: 2vh;
   
-  background-color: #262626; /*#b7e8f4;*/
+   background-color: #b7e8f4; */
 }
 
 .navbarImage {
@@ -40,6 +40,10 @@
   padding-top: 4vh;
   background-color: #595959;
   color: #ffc000;
+}
+
+.appFooter a{
+  color: #ffffff;
 }
 
 /* Page */
