@@ -7,6 +7,7 @@ import PageParagraphSection from './PageComponents/PageParagraphSection';
 import PageImageCardSection from './PageComponents/PageImageCardSection';
 import PageImageSection from './PageComponents/PageImageSection';
 import PageBlogSection from './PageComponents/PageBlogSection';
+import PageContactSection from './PageComponents/PageContactSection';
 
 class Page extends Component {
 
@@ -35,14 +36,12 @@ class Page extends Component {
 
     render() {
         let document = this.state.doc;
-        //console.log(document);
 
         if (document) {
             let sections = document.data.body;
             let sectionsComponents = [];
 
             sections.forEach(element => {
-
                 if (element.primary && element.primary.component_type) {
 
                     let sectionComponentType = element.primary.component_type;
@@ -58,6 +57,8 @@ class Page extends Component {
                         sectionContents = <PageImageSection slice={element} />;
                     } else if (sectionComponentType === 'blog_section') {
                         sectionContents = <PageBlogSection slice={element} />;
+                    } else if (sectionComponentType === 'contact_section') {
+                        sectionContents = <PageContactSection slice={element} />;
                     }
 
                     if (sectionContents) {
