@@ -42,6 +42,10 @@
   color: #ffc000;
 }
 
+.appFooter .list-unstyled{
+  color: white !important;
+}
+
 /* Page */
 .pageSections {
   padding: 2vh;
