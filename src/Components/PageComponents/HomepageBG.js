@@ -8,7 +8,7 @@ class HomepageBG extends Component {
         
         return (
             <div className="justify-content-center">
-                <img src={imgurl}></img>
+                <img src={imgurl} className="homeImg"></img>
             </div>
         );
     }

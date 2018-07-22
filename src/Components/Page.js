@@ -52,7 +52,7 @@ class Page extends Component {
             console.log(document.data.background_image);
             homeBgContents = <HomepageBG slice={document.data.background_image} pageType={pageType}/>;
 
-            let homepageDiv = <div className="homeImg">{homeBgContents}</div>
+            let homepageDiv = <div className="homeImgDiv">{homeBgContents}</div>
             homepageBgComponents.push(homepageDiv);
         }
 
@@ -89,13 +89,13 @@ class Page extends Component {
         console.log(pageType);
         return (
             <div className={pageType}>
+                <div data-wio-id={document.id}>
+                    {homepageBgComponents}
+                </div>
                 <Container className="pageSections">
                     <Helmet>
                         <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
                     </Helmet>
-                    <div data-wio-id={document.id}>
-                        {homepageBgComponents}
-                    </div>
                     <div data-wio-id={document.id}>
                         {sectionsComponents}
                     </div>
