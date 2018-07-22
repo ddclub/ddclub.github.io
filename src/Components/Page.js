@@ -39,50 +39,55 @@ class Page extends Component {
         let document = this.state.doc;
         //console.log(document);
 
-        if (document) {
-            let sections = document.data.body;
-            let sectionsComponents = [];
+        if (!document || !document.data) return <div></div>;
 
-            sections.forEach(element => {
+        let pageType = document.data.page_type;
+        if(pageType===null) pageType = 'standard_page';
+        let sections = document.data.body;
+        let sectionsComponents = [];
 
-                if (element.primary && element.primary.component_type) {
+        sections.forEach(element => {
 
-                    let sectionComponentType = element.primary.component_type;
-                    let sectionContents = null;
+            if (element.primary && element.primary.component_type) {
 
-                    if (sectionComponentType === 'header_section') {
-                        sectionContents = <PageHeaderSection slice={element} />;
-                    } else if (sectionComponentType === 'paragraph_section') {
-                        sectionContents = <PageParagraphSection slice={element} />;
-                    } else if (sectionComponentType === 'image_card_section') {
-                        sectionContents = <PageImageCardSection slice={element} />;
-                    } else if (sectionComponentType === 'image_section') {
-                        sectionContents = <PageImageSection slice={element} />;
-                    } else if (sectionComponentType === 'blog_section') {
-                        sectionContents = <PageBlogSection slice={element} />;
-                    }
+                let sectionComponentType = element.primary.component_type;
+                let sectionContents = null;
 
-                    if (sectionContents) {
-                        let sectionDiv = <div className="pageSection">{sectionContents}</div>;
-                        sectionsComponents.push(sectionDiv);
-                    }
-
+                if (sectionComponentType === 'header_section') {
+                    sectionContents = <PageHeaderSection slice={element} />;
+                } else if (sectionComponentType === 'paragraph_section') {
+                    sectionContents = <PageParagraphSection slice={element} />;
+                } else if (sectionComponentType === 'image_card_section') {
+                    sectionContents = <PageImageCardSection slice={element} />;
+                } else if (sectionComponentType === 'image_section') {
+                    sectionContents = <PageImageSection slice={element} />;
+                } else if (sectionComponentType === 'blog_section') {
+                    sectionContents = <PageBlogSection slice={element} />;
                 }
-            });
 
-            return (
+                if (sectionContents) {
+                    let sectionDiv = <div className="pageSection">{sectionContents}</div>;
+                    sectionsComponents.push(sectionDiv);
+                }
+
+            }
+        });
+
+        console.log(pageType);
+        return (
+            <div className={pageType}>
                 <Container className="pageSections">
                     <Helmet>
-                        <title>{document.data.title && document.data.title+' - '}{PrismicConfig.siteTitle}</title>
-                        </Helmet>
+                        <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
+                    </Helmet>
                     <div data-wio-id={document.id}>
                         {sectionsComponents}
                     </div>
                 </Container>
-            );
-        }
-        return <div></div>;
+            </div>
+        );
     }
+
 }
 
 export default Page;
