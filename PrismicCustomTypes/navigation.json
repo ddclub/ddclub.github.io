@@ -1,0 +1,72 @@
+{
+  "Main" : {
+    "navbar_title" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Navbar Title"
+      }
+    },
+    "slug" : {
+      "type" : "Text",
+      "config" : {
+        "label" : "Slug",
+        "useAsTitle" : true
+      }
+    },
+    "navbar_image" : {
+      "type" : "Image",
+      "config" : {
+        "constraint" : { },
+        "thumbnails" : [ ],
+        "label" : "Navbar Image"
+      }
+    },
+    "body" : {
+      "type" : "Slices",
+      "fieldset" : "Slice zone",
+      "config" : {
+        "choices" : {
+          "nav_item" : {
+            "type" : "Slice",
+            "fieldset" : "Nav Item",
+            "description" : "Displays link title and corresponding link",
+            "icon" : "insert_link",
+            "display" : "list",
+            "non-repeat" : {
+              "item_title" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Item Title"
+                }
+              },
+              "item_link" : {
+                "type" : "Link",
+                "config" : {
+                  "select" : "document",
+                  "customtypes" : [ "page" ],
+                  "label" : "Item Link"
+                }
+              }
+            },
+            "repeat" : {
+              "sub_item_title" : {
+                "type" : "Text",
+                "config" : {
+                  "label" : "Sub Item Title"
+                }
+              },
+              "sub_item_link" : {
+                "type" : "Link",
+                "config" : {
+                  "select" : "document",
+                  "customtypes" : [ "page" ],
+                  "label" : "Sub Item Link"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
