@@ -42,7 +42,7 @@ class Page extends Component {
         if (!document || !document.data) return <div></div>;
 
         let pageType = document.data.page_type;
-        if(pageType===null) pageType = 'standard_page';
+        if(pageType === null) pageType = 'standard_page';
         let sections = document.data.body;
         let sectionsComponents = [];
 
@@ -54,15 +54,15 @@ class Page extends Component {
                 let sectionContents = null;
 
                 if (sectionComponentType === 'header_section') {
-                    sectionContents = <PageHeaderSection slice={element} />;
+                    sectionContents = <PageHeaderSection slice={element} pageType={pageType}/>;
                 } else if (sectionComponentType === 'paragraph_section') {
-                    sectionContents = <PageParagraphSection slice={element} />;
+                    sectionContents = <PageParagraphSection slice={element} pageType={pageType}/>;
                 } else if (sectionComponentType === 'image_card_section') {
-                    sectionContents = <PageImageCardSection slice={element} />;
+                    sectionContents = <PageImageCardSection slice={element} pageType={pageType}/>;
                 } else if (sectionComponentType === 'image_section') {
-                    sectionContents = <PageImageSection slice={element} />;
+                    sectionContents = <PageImageSection slice={element} pageType={pageType}/>;
                 } else if (sectionComponentType === 'blog_section') {
-                    sectionContents = <PageBlogSection slice={element} />;
+                    sectionContents = <PageBlogSection slice={element} pageType={pageType}/>;
                 }
 
                 if (sectionContents) {
