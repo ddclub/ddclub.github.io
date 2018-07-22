@@ -16,10 +16,10 @@
   font-family: 'Khand', sans-serif;
   text-transform: uppercase;
   font-size: 2rem;
-
+  /*
   padding: 2vh;
   
-  background-color: #262626; /*#b7e8f4;*/
+   background-color: #b7e8f4; */
 }
 
 .navbarImage {
@@ -42,8 +42,8 @@
   color: #ffc000;
 }
 
-.appFooter .list-unstyled{
-  color: white !important;
+.appFooter a{
+  color: #ffffff;
 }
 
 /* Page */
