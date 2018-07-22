@@ -4,6 +4,8 @@ import { Container, Row } from 'reactstrap';
 import Helmet from 'react-helmet';
 import PrismicConfig from '../Prismic/PrismicConfig';
 
+import HomepageBG from './PageComponents/HomepageBG';
+
 import PageHeaderSection from './PageComponents/PageHeaderSection';
 import PageParagraphSection from './PageComponents/PageParagraphSection';
 import PageImageCardSection from './PageComponents/PageImageCardSection';
@@ -37,12 +39,23 @@ class Page extends Component {
 
     render() {
         let document = this.state.doc;
-        //console.log(document);
+        console.log(document);
 
         if (!document || !document.data) return <div></div>;
 
         let pageType = document.data.page_type;
+
+        let homeBgContents = null;
+        let homepageBgComponents = [];
         if(pageType === null) pageType = 'standard_page';
+        else {
+            console.log(document.data.background_image);
+            homeBgContents = <HomepageBG slice={document.data.background_image} pageType={pageType}/>;
+
+            let homepageDiv = <div className="homeImg">{homeBgContents}</div>
+            homepageBgComponents.push(homepageDiv);
+        }
+
         let sections = document.data.body;
         let sectionsComponents = [];
 
@@ -80,6 +93,9 @@ class Page extends Component {
                     <Helmet>
                         <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
                     </Helmet>
+                    <div data-wio-id={document.id}>
+                        {homepageBgComponents}
+                    </div>
                     <div data-wio-id={document.id}>
                         {sectionsComponents}
                     </div>
