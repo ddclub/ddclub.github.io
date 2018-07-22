@@ -100,7 +100,7 @@ class NavBar extends Component {
                         <NavbarBrand href="/">
                             <span>
                                 {navbarImage &&
-                                    <img width="140" height="70" alt="" src={navbarImage}></img>} {navbarTitle}
+                                    <img className="navbarImage" alt="" src={navbarImage}></img>} {navbarTitle}
                             </span>
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
