@@ -85,7 +85,7 @@ class Page extends Component {
             }
         });
 
-        if (pageType === 'home_page' && sectionsComponents.length > 3) {
+        if (pageType === 'home_page' && sectionsComponents.length >= 3) {
             firstThreeComponents = sectionsComponents.splice(0, 3);
         }
 
