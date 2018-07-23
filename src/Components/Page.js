@@ -4,8 +4,6 @@ import { Container, Row } from 'reactstrap';
 import Helmet from 'react-helmet';
 import PrismicConfig from '../Prismic/PrismicConfig';
 
-import HomepageBG from './PageComponents/HomepageBG';
-
 import PageHeaderSection from './PageComponents/PageHeaderSection';
 import PageParagraphSection from './PageComponents/PageParagraphSection';
 import PageImageCardSection from './PageComponents/PageImageCardSection';
@@ -39,21 +37,22 @@ class Page extends Component {
 
     render() {
         let document = this.state.doc;
-        console.log(document);
+        //console.log(document);
 
         if (!document || !document.data) return <div></div>;
 
         let pageType = document.data.page_type;
 
-        let homeBgContents = null;
-        let homepageBgComponents = [];
-        if(pageType === null) pageType = 'standard_page';
-        else {
-            console.log(document.data.background_image);
-            homeBgContents = <HomepageBG slice={document.data.background_image} pageType={pageType}/>;
+        if (pageType === null) pageType = 'standard_page';
 
-            let homepageDiv = <div className="homeImgDiv">{homeBgContents}</div>
-            homepageBgComponents.push(homepageDiv);
+        //check if background image exists
+        let pageStyle = {};
+        if(document.data.background_image && document.data.background_image.url){
+            pageStyle = {
+                backgroundImage: `url(${document.data.background_image.url})`,
+                backgroundSize: 'cover',
+                overflow: 'hidden'
+            };
         }
 
         let sections = document.data.body;
@@ -67,15 +66,15 @@ class Page extends Component {
                 let sectionContents = null;
 
                 if (sectionComponentType === 'header_section') {
-                    sectionContents = <PageHeaderSection slice={element} pageType={pageType}/>;
+                    sectionContents = <PageHeaderSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'paragraph_section') {
-                    sectionContents = <PageParagraphSection slice={element} pageType={pageType}/>;
+                    sectionContents = <PageParagraphSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'image_card_section') {
-                    sectionContents = <PageImageCardSection slice={element} pageType={pageType}/>;
+                    sectionContents = <PageImageCardSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'image_section') {
-                    sectionContents = <PageImageSection slice={element} pageType={pageType}/>;
+                    sectionContents = <PageImageSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'blog_section') {
-                    sectionContents = <PageBlogSection slice={element} pageType={pageType}/>;
+                    sectionContents = <PageBlogSection slice={element} pageType={pageType} />;
                 }
 
                 if (sectionContents) {
@@ -86,13 +85,9 @@ class Page extends Component {
             }
         });
 
-        console.log(pageType);
         return (
-            <div className={pageType}>
-                <div data-wio-id={document.id}>
-                    {homepageBgComponents}
-                </div>
-                <Container className="pageSections">
+            <div className={pageType} style={pageStyle}>
+                <Container className='pageSections'>
                     <Helmet>
                         <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
                     </Helmet>
