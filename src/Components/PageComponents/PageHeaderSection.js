@@ -22,7 +22,7 @@ class PageHeaderSection extends Component {
                     headerTag = <h1 className="home_subtitle">{asText(headerText)}</h1>;
                     break;
                 default:
-                    RenderRichText(headerText);
+                    headerTag = RenderRichText(headerText);
             }
         }
 
