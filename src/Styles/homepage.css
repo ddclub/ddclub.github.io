@@ -1,0 +1,34 @@
+.home_page {
+/*	display: table-cell;
+	vertical-align: middle;*/
+	/*margin: 0 au/to;*/
+	position: relative;
+
+}
+
+  .home_title {
+  	font-size: 4em;
+  	font-weight: 600;
+  }
+
+  .home_subtitle {
+  	font-size: 2em;
+  	font-weight: 600;
+  }
+
+  .content_home_page {
+  	margin-top: 25vh;
+  	border-radius: 2vh;
+  	border: 1px solid white;
+  	background-color: white;
+  	padding: 3vh;
+  	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  }
+
+  .first_three_home_page {
+  	color: white;
+  	margin-top: 25vh;
+  	font-family: 'Raleway', sans-serif !important;
+  	text-transform: uppercase !important;
+  }

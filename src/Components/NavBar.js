@@ -43,7 +43,7 @@ class NavBar extends Component {
     buildNavItem(item) {
         return <LinkContainer to={item.primary.item_link.uid}>
             <NavItem key={item.primary.item_link.uid}>
-                <NavLink>{item.primary.item_title}</NavLink>
+                <NavLink className="navItem">{item.primary.item_title}</NavLink>
             </NavItem>
         </LinkContainer>;
     }
@@ -63,7 +63,7 @@ class NavBar extends Component {
         });
 
         let dropd = <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret>
+            <DropdownToggle nav caret className="navItem">
                 {element.primary.item_title && element.primary.item_title}
             </DropdownToggle>
             <DropdownMenu right>
@@ -96,11 +96,11 @@ class NavBar extends Component {
 
             return (
                 <div> 
-                    <Navbar light expand="lg">
+                    <Navbar dark expand="lg">
                         <NavbarBrand href="/">
                             <span>
                                 {navbarImage &&
-                                    <img width="140" height="70" alt="" src={navbarImage}></img>} {navbarTitle}
+                                    <img className="navbarImage" alt="" src={navbarImage}></img>} {navbarTitle}
                             </span>
                         </NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
