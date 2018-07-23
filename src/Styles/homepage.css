@@ -7,13 +7,11 @@
 }
 
   .home_title {
-  	color: white;
   	font-size: 4em;
   	font-weight: 600;
   }
 
   .home_subtitle {
-  	color: white;
   	font-size: 2em;
   	font-weight: 600;
   }
@@ -29,6 +27,7 @@
   }
 
   .first_three_home_page {
+  	color: white;
   	margin-top: 25vh;
   	font-family: 'Raleway', sans-serif !important;
   	text-transform: uppercase !important;
