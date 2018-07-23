@@ -1,47 +1,10 @@
-.homeImg {
-	width: 100%;
-	object-fit: cover;
-}
 .home_page {
 /*	display: table-cell;
 	vertical-align: middle;*/
 	/*margin: 0 au/to;*/
 	position: relative;
-	
+
 }
-
-
-/*.pageSections_home_page {
-	font-family: 'Raleway', sans-serif !important;
-	font-weight: bold;
-
-	color: white;
-
-	padding-bottom: 1vh;
-	padding-bottom: 1%;
-	position: absolute;
-    top: 80%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-transform: uppercase !important;
-
-  }*/
-
-  .pageSections_home_page {
-	font-family: 'Raleway', sans-serif !important;
-	
-	height: 100%;
-	position:absolute;
-	top:65%;
-	left:50%; 
-	text-align:center;
-	transform: translateX(-50%) translateY(-50%);
-  }
-
-  .pageSections_home_page h1{
-  	font-family: 'Raleway', sans-serif !important;
-  	text-transform: uppercase !important;
-  }
 
   .home_title {
   	color: white;
@@ -56,11 +19,17 @@
   }
 
   .content_home_page {
-  	margin-top: 15vh;
+  	margin-top: 25vh;
   	border-radius: 2vh;
   	border: 1px solid white;
   	background-color: white;
   	padding: 3vh;
   	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+  }
+
+  .first_three_home_page {
+  	margin-top: 25vh;
+  	font-family: 'Raleway', sans-serif !important;
+  	text-transform: uppercase !important;
   }
