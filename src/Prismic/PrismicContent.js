@@ -3,7 +3,7 @@ import { } from 'react';
 import Cookies from 'js-cookie';
 import qs from 'qs';
 import PrismicConfig from '../Prismic/PrismicConfig';
-import { RichText } from 'prismic-reactjs';
+import { Link, RichText } from 'prismic-reactjs';
 
 //Add your own endpoint here
 const apiEndpoint = PrismicConfig.apiEndpoint;
@@ -20,6 +20,14 @@ export function linkResolver(doc) {
 
     // Default to homepage
     return '/#/';
+}
+
+export function PrismicWebLink(doc){
+    return Link.url(doc.data.web_link, linkResolver);
+}
+
+export function PrismicDocLink(doc){
+    return Link.url(doc.data.document_link, linkResolver);
 }
 
 export function refreshToolbar(cmp) {
@@ -69,6 +77,20 @@ export function PrismicSetPage(cmp) {
             if (response) {
                 cmp.setState({
                     doc: response.results[0],
+                    api: api
+                });
+            }
+        });
+    });
+}
+
+export function PrismicGetPages(cmp) {
+    Prismic.api(apiEndpoint).then(api => {
+        const ref = getRef(api);
+        api.query(Prismic.Predicates.at('document.type','page'), { ref: ref }).then(response => {
+            if (response) {
+                cmp.setState({
+                    docs: response.results,
                     api: api
                 });
             }

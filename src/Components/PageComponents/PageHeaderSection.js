@@ -11,7 +11,7 @@ class PageHeaderSection extends Component {
         let order = this.props.order;
         console.log(headerText);
 
-        let headerTag;
+        let headerTag = RenderRichText(headerText);
         if (pageType === 'home_page') {
             switch (headerText[0].type) {
                 case 'heading1':
@@ -22,7 +22,7 @@ class PageHeaderSection extends Component {
                     headerTag = <h1 className="home_subtitle">{asText(headerText)}</h1>;
                     break;
                 default:
-                    headerTag = RenderRichText(headerText);
+                    break;
             }
         }
 
