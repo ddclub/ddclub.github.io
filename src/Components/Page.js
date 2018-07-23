@@ -39,50 +39,75 @@ class Page extends Component {
         let document = this.state.doc;
         //console.log(document);
 
-        if (document) {
-            let sections = document.data.body;
-            let sectionsComponents = [];
+        if (!document || !document.data) return <div></div>;
 
-            sections.forEach(element => {
+        let pageType = document.data.page_type;
 
-                if (element.primary && element.primary.component_type) {
+        if (pageType === null) pageType = 'standard_page';
 
-                    let sectionComponentType = element.primary.component_type;
-                    let sectionContents = null;
+        //check if background image exists
+        let pageStyle = {};
+        if (document.data.background_image && document.data.background_image.url) {
+            pageStyle = {
+                backgroundImage: `url(${document.data.background_image.url})`,
+                backgroundSize: 'cover',
+                overflow: 'hidden'
+            };
+        }
 
-                    if (sectionComponentType === 'header_section') {
-                        sectionContents = <PageHeaderSection slice={element} />;
-                    } else if (sectionComponentType === 'paragraph_section') {
-                        sectionContents = <PageParagraphSection slice={element} />;
-                    } else if (sectionComponentType === 'image_card_section') {
-                        sectionContents = <PageImageCardSection slice={element} />;
-                    } else if (sectionComponentType === 'image_section') {
-                        sectionContents = <PageImageSection slice={element} />;
-                    } else if (sectionComponentType === 'blog_section') {
-                        sectionContents = <PageBlogSection slice={element} />;
-                    }
+        let sections = document.data.body;
+        let sectionsComponents = [];
+        let firstThreeComponents = [];
 
-                    if (sectionContents) {
-                        let sectionDiv = <div className="pageSection">{sectionContents}</div>;
-                        sectionsComponents.push(sectionDiv);
-                    }
+        sections.forEach(element => {
 
+            if (element.primary && element.primary.component_type) {
+
+                let sectionComponentType = element.primary.component_type;
+                let sectionContents = null;
+
+                if (sectionComponentType === 'header_section') {
+                    sectionContents = <PageHeaderSection slice={element} pageType={pageType} order={sectionsComponents.length} />;
+                } else if (sectionComponentType === 'paragraph_section') {
+                    sectionContents = <PageParagraphSection slice={element} pageType={pageType} />;
+                } else if (sectionComponentType === 'image_card_section') {
+                    sectionContents = <PageImageCardSection slice={element} pageType={pageType} />;
+                } else if (sectionComponentType === 'image_section') {
+                    sectionContents = <PageImageSection slice={element} pageType={pageType} />;
+                } else if (sectionComponentType === 'blog_section') {
+                    sectionContents = <PageBlogSection slice={element} pageType={pageType} />;
                 }
-            });
 
-            return (
-                <Container className="pageSections">
-                    <Helmet>
-                        <title>{document.data.title && document.data.title+' - '}{PrismicConfig.siteTitle}</title>
-                        </Helmet>
-                    <div data-wio-id={document.id}>
+                if (sectionContents) {
+                    let sectionDiv = <div className="pageSection">{sectionContents}</div>;
+                    sectionsComponents.push(sectionDiv);
+                }
+            }
+        });
+
+        if (pageType === 'home_page' && sectionsComponents.length >= 3) {
+            firstThreeComponents = sectionsComponents.splice(0, 3);
+        }
+
+        return (
+            <div className={pageType} style={pageStyle}>
+                <Helmet>
+                    <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
+                </Helmet>
+                <Container className='pageSections' data-wio-id={document.id}>
+                    {pageType === 'home_page' &&
+                        <div className={'first_three_' + pageType}>
+                            {firstThreeComponents}
+                        </div>
+                    }
+                    <div className={'content_' + pageType}>
                         {sectionsComponents}
                     </div>
                 </Container>
-            );
-        }
-        return <div></div>;
+            </div>
+        );
     }
+
 }
 
 export default Page;

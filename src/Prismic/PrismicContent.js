@@ -49,6 +49,10 @@ export function RenderRichText(txt) {
     return RichText.render(txt, linkResolver);
 }
 
+export function asText(txt){
+    return RichText.asText(txt);
+}
+
 function getRef(api) {
     const previewRef = Cookies.get(Prismic.previewCookie);
     const masterRef = api.refs.find(ref => { return ref.isMasterRef === true }).ref;
