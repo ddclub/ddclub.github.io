@@ -23,11 +23,19 @@ export function linkResolver(doc) {
 }
 
 export function PrismicWebLink(doc){
-    return Link.url(doc.data.web_link, linkResolver);
+    try{
+        return Link.url(doc.data.web_link, linkResolver);
+    }catch(err){
+        return null;
+    }    
 }
 
 export function PrismicDocLink(doc){
-    return Link.url(doc.data.document_link, linkResolver);
+    try{
+        return Link.url(doc.data.document_link, linkResolver);
+    }catch(err){
+        return null;
+    }  
 }
 
 export function refreshToolbar(cmp) {
@@ -87,7 +95,7 @@ export function PrismicSetPage(cmp) {
 export function PrismicGetPages(cmp) {
     Prismic.api(apiEndpoint).then(api => {
         const ref = getRef(api);
-        api.query(Prismic.Predicates.at('document.type','page'), { ref: ref }).then(response => {
+        api.query(Prismic.Predicates.at('document.type','page'), { ref: ref, pageSize : 100 }).then(response => {
             if (response) {
                 cmp.setState({
                     docs: response.results,

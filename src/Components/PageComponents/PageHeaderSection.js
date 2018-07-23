@@ -8,8 +8,6 @@ class PageHeaderSection extends Component {
         let slice = this.props.slice;
         let headerText = slice.primary.header_text;
         let pageType = this.props.pageType;
-        let order = this.props.order;
-        console.log(headerText);
 
         let headerTag = RenderRichText(headerText);
         if (pageType === 'home_page') {
