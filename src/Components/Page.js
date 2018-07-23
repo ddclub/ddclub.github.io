@@ -67,7 +67,7 @@ class Page extends Component {
                 let sectionContents = null;
 
                 if (sectionComponentType === 'header_section') {
-                    sectionContents = <PageHeaderSection slice={element} pageType={pageType} />;
+                    sectionContents = <PageHeaderSection slice={element} pageType={pageType} order={sectionsComponents.length}/>;
                 } else if (sectionComponentType === 'paragraph_section') {
                     sectionContents = <PageParagraphSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'image_card_section') {

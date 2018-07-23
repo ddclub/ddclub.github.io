@@ -8,28 +8,29 @@ class PageHeaderSection extends Component {
         let slice = this.props.slice;
         let headerText = slice.primary.header_text;
         let pageType = this.props.pageType;
+        let order = this.props.order;
+        console.log(headerText);
+
+        let headerTag;
+        if (pageType === 'home_page') {
+            switch (headerText[0].type) {
+                case 'heading1':
+                    headerTag = <h1 className="home_title">{asText(headerText)}</h1>;
+                    break;
+                case 'heading2':
+                case 'heading3':
+                    headerTag = <h1 className="home_subtitle">{asText(headerText)}</h1>;
+                    break;
+                default:
+                    RenderRichText(headerText);
+            }
+        }
 
         return (
             <Row className="justify-content-center">
                 <Col>
-                    <div className="text-center">
-                        <div className={pageType}>
-                            {pageType === 'home_page' && asText(headerText) === 'Double Degree Club' &&
-                                <h1 className="home_title">{asText(headerText)}</h1>
-                            }
-                            {pageType === 'home_page' && asText(headerText) === 'University of Waterloo' &&
-                                <h1 className="home_subtitle">{asText(headerText)}</h1>
-                            }
-                            {pageType === 'home_page' && asText(headerText) === 'Wilfrid Laurier University' &&
-                                <h1 className="home_subtitle">{asText(headerText)}</h1>
-                            }
-                            {pageType === 'home_page' && asText(headerText) === 'Upcoming Events' &&
-                                <h1>{asText(headerText)}</h1>
-                            }
-                            {pageType !== 'home_page' &&
-                                RenderRichText(headerText)
-                            }
-                        </div>
+                    <div className={"text-center " + pageType}>
+                        {headerTag}
                     </div>
                 </Col>
             </Row>
