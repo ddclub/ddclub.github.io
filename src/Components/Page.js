@@ -67,7 +67,7 @@ class Page extends Component {
                 let sectionContents = null;
 
                 if (sectionComponentType === 'header_section') {
-                    sectionContents = <PageHeaderSection slice={element} pageType={pageType} order={sectionsComponents.length}/>;
+                    sectionContents = <PageHeaderSection slice={element} pageType={pageType} order={sectionsComponents.length} />;
                 } else if (sectionComponentType === 'paragraph_section') {
                     sectionContents = <PageParagraphSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'image_card_section') {
@@ -95,9 +95,11 @@ class Page extends Component {
                     <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
                 </Helmet>
                 <Container className='pageSections' data-wio-id={document.id}>
-                    <div className={'first_three_' + pageType}>
-                        {firstThreeComponents}
-                    </div>
+                    {pageType === 'home_page' &&
+                        <div className={'first_three_' + pageType}>
+                            {firstThreeComponents}
+                        </div>
+                    }
                     <div className={'content_' + pageType}>
                         {sectionsComponents}
                     </div>
