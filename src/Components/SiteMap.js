@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Container } from 'reactstrap';
 import { PrismicDocLink, PrismicWebLink, PrismicGetPages, refreshToolbar } from '../Prismic/PrismicContent';
 
 export default class Preview extends React.Component {
@@ -34,9 +35,9 @@ export default class Preview extends React.Component {
         });
 
         return (
-            <div className='site-map'>
+            <Container className='site-map'>
                 {links}
-            </div>
+            </Container>
         );
     }
 }
