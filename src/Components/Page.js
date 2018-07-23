@@ -47,7 +47,7 @@ class Page extends Component {
 
         //check if background image exists
         let pageStyle = {};
-        if(document.data.background_image && document.data.background_image.url){
+        if (document.data.background_image && document.data.background_image.url) {
             pageStyle = {
                 backgroundImage: `url(${document.data.background_image.url})`,
                 backgroundSize: 'cover',
@@ -59,7 +59,6 @@ class Page extends Component {
         let sectionsComponents = [];
         let firstThreeComponents = [];
 
-        let numComponents = 0;
         sections.forEach(element => {
 
             if (element.primary && element.primary.component_type) {
@@ -69,45 +68,38 @@ class Page extends Component {
 
                 if (sectionComponentType === 'header_section') {
                     sectionContents = <PageHeaderSection slice={element} pageType={pageType} />;
-                    numComponents ++;
                 } else if (sectionComponentType === 'paragraph_section') {
                     sectionContents = <PageParagraphSection slice={element} pageType={pageType} />;
-                    numComponents ++;
                 } else if (sectionComponentType === 'image_card_section') {
                     sectionContents = <PageImageCardSection slice={element} pageType={pageType} />;
-                    numComponents ++;
                 } else if (sectionComponentType === 'image_section') {
                     sectionContents = <PageImageSection slice={element} pageType={pageType} />;
-                    numComponents ++;
                 } else if (sectionComponentType === 'blog_section') {
                     sectionContents = <PageBlogSection slice={element} pageType={pageType} />;
-                    numComponents ++;
                 }
 
-                if (sectionContents && numComponents > 3) {
+                if (sectionContents) {
                     let sectionDiv = <div className="pageSection">{sectionContents}</div>;
                     sectionsComponents.push(sectionDiv);
-                } else {
-                    let sectionDiv = <div className="pageSection">{sectionContents}</div>;
-                    firstThreeComponents.push(sectionDiv);
                 }
-
             }
         });
 
+        if (pageType === 'home_page' && sectionsComponents.length > 3) {
+            firstThreeComponents = sectionsComponents.splice(0, 3);
+        }
+
         return (
             <div className={pageType} style={pageStyle}>
-                <Container className='pageSections'>
-                    <Helmet>
-                        <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
-                    </Helmet>
+                <Helmet>
+                    <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
+                </Helmet>
+                <Container className='pageSections' data-wio-id={document.id}>
                     <div className={'first_three_' + pageType}>
                         {firstThreeComponents}
                     </div>
                     <div className={'content_' + pageType}>
-                    <div data-wio-id={document.id}>
                         {sectionsComponents}
-                    </div>
                     </div>
                 </Container>
             </div>
