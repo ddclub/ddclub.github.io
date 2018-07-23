@@ -17,7 +17,7 @@
   }
 
   .content_home_page {
-  	margin-top: 25vh;
+  	margin-top: 4vh;
   	border-radius: 2vh;
   	border: 1px solid white;
   	background-color: white;
@@ -28,7 +28,7 @@
 
   .first_three_home_page {
   	color: white;
-  	margin-top: 25vh;
+  	margin-top: 8vh;
   	font-family: 'Raleway', sans-serif !important;
   	text-transform: uppercase !important;
   }
