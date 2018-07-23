@@ -96,7 +96,7 @@ class NavBar extends Component {
 
             return (
                 <div> 
-                    <Navbar light expand="lg">
+                    <Navbar dark expand="lg">
                         <NavbarBrand href="/">
                             <span>
                                 {navbarImage &&
