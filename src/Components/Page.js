@@ -53,12 +53,15 @@ class Page extends Component {
             homeBgContents = <HomepageBG slice={document.data.background_image} pageType={pageType}/>;
 
             let homepageDiv = <div className="homeImgDiv">{homeBgContents}</div>
-            homepageBgComponents.push(homepageDiv);
+            homepageBgComponents.push(homeBgContents);
         }
 
         let sections = document.data.body;
+
+        let firstThreeComponents = [];
         let sectionsComponents = [];
 
+        let numComponents = 0;
         sections.forEach(element => {
 
             if (element.primary && element.primary.component_type) {
@@ -68,19 +71,27 @@ class Page extends Component {
 
                 if (sectionComponentType === 'header_section') {
                     sectionContents = <PageHeaderSection slice={element} pageType={pageType}/>;
+                    numComponents ++;
                 } else if (sectionComponentType === 'paragraph_section') {
                     sectionContents = <PageParagraphSection slice={element} pageType={pageType}/>;
+                    numComponents ++;
                 } else if (sectionComponentType === 'image_card_section') {
                     sectionContents = <PageImageCardSection slice={element} pageType={pageType}/>;
+                    numComponents ++;
                 } else if (sectionComponentType === 'image_section') {
                     sectionContents = <PageImageSection slice={element} pageType={pageType}/>;
+                    numComponents ++;
                 } else if (sectionComponentType === 'blog_section') {
                     sectionContents = <PageBlogSection slice={element} pageType={pageType}/>;
+                    numComponents ++;
                 }
 
-                if (sectionContents) {
+                if (sectionContents && numComponents > 3) {
                     let sectionDiv = <div className="pageSection">{sectionContents}</div>;
                     sectionsComponents.push(sectionDiv);
+                } else {
+                    let sectionDiv = <div className="pageSection">{sectionContents}</div>;
+                    firstThreeComponents.push(sectionDiv);
                 }
 
             }
@@ -89,17 +100,16 @@ class Page extends Component {
         console.log(pageType);
         return (
             <div className={pageType}>
-                <div data-wio-id={document.id}>
                     {homepageBgComponents}
-                </div>
-                <Container className="pageSections">
-                    <Helmet>
-                        <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
-                    </Helmet>
-                    <div data-wio-id={document.id}>
-                        {sectionsComponents}
-                    </div>
-                </Container>
+                    <Container className={'pageSections_' + pageType}>
+                        <Helmet>
+                            <title>{document.data.title && document.data.title + ' - '}{PrismicConfig.siteTitle}</title>
+                        </Helmet>
+                        {firstThreeComponents}
+                        <div className={'content_' + pageType}>
+                            {sectionsComponents}
+                        </div>
+                    </Container>
             </div>
         );
     }

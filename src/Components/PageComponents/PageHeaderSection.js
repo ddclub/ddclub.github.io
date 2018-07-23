@@ -14,8 +14,17 @@ class PageHeaderSection extends Component {
                 <Col>
                     <div className="text-center">
                         <div className={pageType}>
-                            {pageType === 'home_page' &&
-                                <h1 className={pageType}>{asText(headerText)}</h1>
+                            {pageType === 'home_page' && asText(headerText) === 'Double Degree Club' &&
+                                <h1 className="home_title">{asText(headerText)}</h1>
+                            }
+                            {pageType === 'home_page' && asText(headerText) === 'University of Waterloo' &&
+                                <h1 className="home_subtitle">{asText(headerText)}</h1>
+                            }
+                            {pageType === 'home_page' && asText(headerText) === 'Wilfrid Laurier University' &&
+                                <h1 className="home_subtitle">{asText(headerText)}</h1>
+                            }
+                            {pageType === 'home_page' && asText(headerText) === 'Upcoming Events' &&
+                                <h1>{asText(headerText)}</h1>
                             }
                             {pageType !== 'home_page' &&
                                 RenderRichText(headerText)

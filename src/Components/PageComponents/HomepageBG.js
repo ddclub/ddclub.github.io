@@ -7,9 +7,7 @@ class HomepageBG extends Component {
         let imgurl = slice.url;
         
         return (
-            <div className="justify-content-center">
                 <img src={imgurl} className="homeImg"></img>
-            </div>
         );
     }
 

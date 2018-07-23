@@ -4,7 +4,7 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
-.home_page h1 {
+/*.home_page h1 {
 	background-color: #d1d1d1;
 	border-radius: 0.3em;
 	font-family: 'Raleway', sans-serif !important;
@@ -15,7 +15,7 @@ body {
 	padding-bottom: 5px;
 	box-shadow: 5px 10px 5px rgba(0, 0, 0, 0.10);
 	text-align: center;
-}
+}*/
 
 .pageSections h2, .pageSections h3, .pageSections h4,
 .pageSections h5, .pageSections h6 {
@@ -63,8 +63,9 @@ body {
   /* Footer */
   .appFooter {
 	padding: 2vh;
-	padding-top: 4vh;
-	background-color: #595959;
+	padding-top: 10vh;
+	/*background-color: #595959;*/
+	background-color: black;
 	color: #ffc000;
   }
   
@@ -78,8 +79,8 @@ body {
   }
   
   .pageSection {
-	padding-bottom: 1vh;
-	padding-bottom: 1%;
+/*	padding-bottom: 1vh;
+	padding-bottom: 1%;*/
   }
   
   .pageHeaderSectionText {
