@@ -23,11 +23,19 @@ export function linkResolver(doc) {
 }
 
 export function PrismicWebLink(doc){
-    return Link.url(doc.data.web_link, linkResolver);
+    try{
+        return Link.url(doc.data.web_link, linkResolver);
+    }catch(err){
+        return null;
+    }    
 }
 
 export function PrismicDocLink(doc){
-    return Link.url(doc.data.document_link, linkResolver);
+    try{
+        return Link.url(doc.data.document_link, linkResolver);
+    }catch(err){
+        return null;
+    }  
 }
 
 export function refreshToolbar(cmp) {

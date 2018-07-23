@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PrismicDocLink, PrismicGetPages, refreshToolbar } from '../Prismic/PrismicContent';
+import { PrismicDocLink, PrismicWebLink, PrismicGetPages, refreshToolbar } from '../Prismic/PrismicContent';
 
 export default class Preview extends React.Component {
 
@@ -23,16 +23,18 @@ export default class Preview extends React.Component {
 
     render() {
         let documents = this.state.docs;
-        console.log(documents);
         if (!documents) return <div></div>;
 
         let links = [];
         documents.forEach(doc => {
-
-            //let doclink = PrismicDocLink(doc);
-            //if(doclink)
-             //   links.push(doclink);
+            if(doc.uid && doc.data.title){
+                let link = <p><a href={'/#/pages/'+doc.uid}>{doc.data.title}</a></p>;
+                links.push(link);
+            }
         });
+
+        console.log('LINKS:');
+        console.log(links)
 
         return (
             <div className='site-map'>
