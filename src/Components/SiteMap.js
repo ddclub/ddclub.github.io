@@ -33,9 +33,6 @@ export default class Preview extends React.Component {
             }
         });
 
-        console.log('LINKS:');
-        console.log(links)
-
         return (
             <div className='site-map'>
                 {links}
