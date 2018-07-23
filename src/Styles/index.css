@@ -54,6 +54,11 @@ body {
   	width: auto;
 	}
 
+	a.wio-link {
+		border-radius: 5px;
+		background: white;
+	}
+
 	.navbar-dark .navbar-nav .nav-link {
 		color: black;
 	}
