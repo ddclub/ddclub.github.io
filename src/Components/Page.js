@@ -9,6 +9,7 @@ import PageParagraphSection from './PageComponents/PageParagraphSection';
 import PageImageCardSection from './PageComponents/PageImageCardSection';
 import PageImageSection from './PageComponents/PageImageSection';
 import PageBlogSection from './PageComponents/PageBlogSection';
+import PageHTMLBlockSection from './PageComponents/PageHTMLBlockSection';
 
 class Page extends Component {
 
@@ -74,9 +75,9 @@ class Page extends Component {
                     sectionContents = <PageImageCardSection slice={element} pageType={pageType} />;
                 } else if (sectionComponentType === 'image_section') {
                     sectionContents = <PageImageSection slice={element} pageType={pageType} />;
-                } else if (sectionComponentType === 'blog_section') {
-                    sectionContents = <PageBlogSection slice={element} pageType={pageType} />;
-                }
+                } else if (sectionComponentType === 'html_block_section') {
+                    sectionContents = <PageHTMLBlockSection slice={element} pageType={pageType} />;
+                } 
 
                 if (sectionContents) {
                     let sectionDiv = <div className="pageSection">{sectionContents}</div>;
