@@ -19,7 +19,13 @@ class ContactForm extends Component{
 			visible: false
 		};
 	}
-	sendDataEmail(){
+	
+	onDismiss(){
+		this.setState({visible: false});
+	}
+
+	sendMessage(){
+		this.setState({visible: true});
 		var options = {
 			headers: {
 				'Authorization': Config.SEND_GRID_AUTH,
@@ -51,13 +57,6 @@ class ContactForm extends Component{
 			}
 		}
 		request.post(options);
-	}
-	onDismiss(){
-		this.setState({visible: false});
-	}
-
-	sendMessage(){
-		this.setState({visible: true});
 	}
 
 	render(){
