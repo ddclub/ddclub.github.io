@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { } from './../../Prismic/PrismicContent';
-
+var Config = require('../../Config.js');
+const request = require('request');
 class ContactForm extends Component{
+		cc_list = [{"email":"dev@ddclub.ca"},{"email":"admin@ddclub.ca"},{"email":"president@ddclub.ca"}];
+		primary_email = "cro@ddclub.ca";
+		email_api_endPoint = "https://api.sendgrid.com/v3/mail/send";
 	constructor(props){
 		super(props);
 
@@ -15,7 +19,39 @@ class ContactForm extends Component{
 			visible: false
 		};
 	}
-
+	sendDataEmail(){
+		var options = {
+			headers: {
+				'Authorization': Config.SEND_GRID_AUTH,
+				'content-type': 'application/json'
+			},
+			url: this.email_api_endPoint,
+			body: {
+				"personalizations": [
+				  {
+					"to": [
+					  {
+						"email": this.primary_email
+					  }
+					],
+					"cc":this.cc_list
+				  }
+				],
+				"subject": this.state.subject,
+				"from": {
+				  "email": this.state.email,
+				  "name": this.state.name
+				},
+				"content": [
+				  {
+					"type": "text/plain",
+					"value": this.state.message
+				  }
+				]
+			}
+		}
+		request.post(options);
+	}
 	onDismiss(){
 		this.setState({visible: false});
 	}
